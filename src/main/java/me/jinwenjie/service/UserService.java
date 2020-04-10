@@ -9,9 +9,9 @@ public interface UserService {
 
     User get(Integer id);
 
-    int create(User user);
+    boolean create(User user);
 
-    int update(User user);
+    boolean update(User user);
 
-    int delete(Integer id);
+    boolean delete(Integer id);
 }

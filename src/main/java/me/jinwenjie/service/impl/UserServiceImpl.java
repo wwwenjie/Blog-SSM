@@ -2,6 +2,7 @@ package me.jinwenjie.service.impl;
 
 import me.jinwenjie.model.User;
 import me.jinwenjie.dao.UserDao;
+import me.jinwenjie.model.UserExample;
 import me.jinwenjie.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,10 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
-    @Override
+    @Override   
     public List<User> list() {
-        return null;
+        UserExample example = new UserExample();
+        return userDao.selectByExample(example);
     }
 
     @Override
@@ -26,17 +28,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int create(User user) {
-        return userDao.insert(user);
+    public boolean create(User user) {
+        return userDao.insert(user) == 1;
     }
 
     @Override
-    public int update(User user) {
-        return userDao.updateByPrimaryKey(user);
+    public boolean update(User user) {
+        return userDao.updateByPrimaryKeySelective(user) == 1;
     }
 
     @Override
-    public int delete(Integer id) {
-        return userDao.deleteByPrimaryKey(id);
+    public boolean delete(Integer id) {
+        return userDao.deleteByPrimaryKey(id) == 1;
     }
 }

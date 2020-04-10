@@ -45,15 +45,7 @@
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
 
-    <table tableName="user_table" domainObjectName="User" mapperName="UserDao"
-           enableCountByExample="false"
-           enableUpdateByExample="false"
-           enableDeleteByExample="false"
-           enableSelectByExample="false"
-           selectByExampleQueryId="false"
-           enableDeleteByPrimaryKey="true"
-           enableInsert="true"
-           enableUpdateByPrimaryKey="true">
+    <table tableName="user_table" domainObjectName="User" mapperName="UserDao">
     </table>
   </context>
 </generatorConfiguration>
