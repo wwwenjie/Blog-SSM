@@ -4,6 +4,7 @@
 *.suo
 *.ntvs*
 *.njsproj
+*.iml
 *.sln
 *.sw?
 
