@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <!-- load jdbc.properties -->
+  <properties resource="jdbc.properties"/>
+
+  <context id="default" targetRuntime="MyBatis3">
+    <!--when suppress all comments, add this plugin to overwrite xml-->
+    <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
+    <commentGenerator>
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+
+    <jdbcConnection
+        connectionURL="${jdbc.url}"
+        driverClass="${jdbc.driverClassName}"
+        userId="${jdbc.username}"
+        password="${jdbc.password}">
+      <property name="nullCatalogMeansCurrent" value="true"/>
+    </jdbcConnection>
+
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+
+    <javaModelGenerator targetPackage="me.jinwenjie.model"
+                        targetProject="src/main/java">
+      <property name="enableSubPackages" value="false"/>
+      <property name="constructorBased" value="true"/>
+      <property name="trimStrings" value="true"/>
+      <property name="immutable" value="false"/>
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="mapper"
+                     targetProject="src/main/resources">
+      <property name="enableSubPackages" value="false"/>
+    </sqlMapGenerator>
+
+    <javaClientGenerator targetPackage="me.jinwenjie.dao"
+                         targetProject="src/main/java" type="XMLMAPPER">
+      <property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+
+    <table tableName="user_table" domainObjectName="User" mapperName="UserDao"
+           enableCountByExample="false"
+           enableUpdateByExample="false"
+           enableDeleteByExample="false"
+           enableSelectByExample="false"
+           selectByExampleQueryId="false"
+           enableDeleteByPrimaryKey="true"
+           enableInsert="true"
+           enableUpdateByPrimaryKey="true">
+    </table>
+  </context>
+</generatorConfiguration>
