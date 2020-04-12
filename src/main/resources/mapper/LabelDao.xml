@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.jinwenjie.dao.LabelDao">
+  <resultMap id="BaseResultMap" type="me.jinwenjie.model.Label">
+    <constructor>
+      <idArg column="label_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="label_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="label_alias" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="label_description" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    label_id, label_name, label_alias, label_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from label
+    where label_id = #{labelId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from label
+    where label_id = #{labelId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="me.jinwenjie.model.Label">
+    insert into label (label_id, label_name, label_alias, 
+      label_description)
+    values (#{labelId,jdbcType=BIGINT}, #{labelName,jdbcType=VARCHAR}, #{labelAlias,jdbcType=VARCHAR}, 
+      #{labelDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="me.jinwenjie.model.Label">
+    insert into label
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="labelId != null">
+        label_id,
+      </if>
+      <if test="labelName != null">
+        label_name,
+      </if>
+      <if test="labelAlias != null">
+        label_alias,
+      </if>
+      <if test="labelDescription != null">
+        label_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="labelId != null">
+        #{labelId,jdbcType=BIGINT},
+      </if>
+      <if test="labelName != null">
+        #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="labelAlias != null">
+        #{labelAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="labelDescription != null">
+        #{labelDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.jinwenjie.model.Label">
+    update label
+    <set>
+      <if test="labelName != null">
+        label_name = #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="labelAlias != null">
+        label_alias = #{labelAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="labelDescription != null">
+        label_description = #{labelDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where label_id = #{labelId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.Label">
+    update label
+    set label_name = #{labelName,jdbcType=VARCHAR},
+      label_alias = #{labelAlias,jdbcType=VARCHAR},
+      label_description = #{labelDescription,jdbcType=VARCHAR}
+    where label_id = #{labelId,jdbcType=BIGINT}
+  </update>
+</mapper>

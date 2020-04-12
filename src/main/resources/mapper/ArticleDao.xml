@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.jinwenjie.dao.ArticleDao">
+  <resultMap id="BaseResultMap" type="me.jinwenjie.model.Article">
+    <constructor>
+      <idArg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="article_views" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_comment_count" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="article_last_modify_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="me.jinwenjie.model.Article">
+    <constructor>
+      <idArg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="article_views" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_comment_count" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="article_last_modify_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="article_content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    article_id, user_id, article_title, article_views, article_comment_count, article_date, 
+    article_last_modify_date
+  </sql>
+  <sql id="Blob_Column_List">
+    article_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="me.jinwenjie.model.ArticleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="me.jinwenjie.model.ArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="me.jinwenjie.model.ArticleExample">
+    delete from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="me.jinwenjie.model.Article">
+    insert into article (article_id, user_id, article_title, 
+      article_views, article_comment_count, article_date, 
+      article_last_modify_date, article_content
+      )
+    values (#{articleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, 
+      #{articleViews,jdbcType=BIGINT}, #{articleCommentCount,jdbcType=BIGINT}, #{articleDate,jdbcType=TIMESTAMP}, 
+      #{articleLastModifyDate,jdbcType=TIMESTAMP}, #{articleContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="me.jinwenjie.model.Article">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="articleViews != null">
+        article_views,
+      </if>
+      <if test="articleCommentCount != null">
+        article_comment_count,
+      </if>
+      <if test="articleDate != null">
+        article_date,
+      </if>
+      <if test="articleLastModifyDate != null">
+        article_last_modify_date,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleViews != null">
+        #{articleViews,jdbcType=BIGINT},
+      </if>
+      <if test="articleCommentCount != null">
+        #{articleCommentCount,jdbcType=BIGINT},
+      </if>
+      <if test="articleDate != null">
+        #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleLastModifyDate != null">
+        #{articleLastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="me.jinwenjie.model.ArticleExample" resultType="java.lang.Long">
+    select count(*) from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update article
+    <set>
+      <if test="record.articleId != null">
+        article_id = #{record.articleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.articleTitle != null">
+        article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleViews != null">
+        article_views = #{record.articleViews,jdbcType=BIGINT},
+      </if>
+      <if test="record.articleCommentCount != null">
+        article_comment_count = #{record.articleCommentCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.articleDate != null">
+        article_date = #{record.articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.articleLastModifyDate != null">
+        article_last_modify_date = #{record.articleLastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.articleContent != null">
+        article_content = #{record.articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update article
+    set article_id = #{record.articleId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      article_views = #{record.articleViews,jdbcType=BIGINT},
+      article_comment_count = #{record.articleCommentCount,jdbcType=BIGINT},
+      article_date = #{record.articleDate,jdbcType=TIMESTAMP},
+      article_last_modify_date = #{record.articleLastModifyDate,jdbcType=TIMESTAMP},
+      article_content = #{record.articleContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update article
+    set article_id = #{record.articleId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      article_views = #{record.articleViews,jdbcType=BIGINT},
+      article_comment_count = #{record.articleCommentCount,jdbcType=BIGINT},
+      article_date = #{record.articleDate,jdbcType=TIMESTAMP},
+      article_last_modify_date = #{record.articleLastModifyDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="me.jinwenjie.model.Article">
+    update article
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleViews != null">
+        article_views = #{articleViews,jdbcType=BIGINT},
+      </if>
+      <if test="articleCommentCount != null">
+        article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+      </if>
+      <if test="articleDate != null">
+        article_date = #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleLastModifyDate != null">
+        article_last_modify_date = #{articleLastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="me.jinwenjie.model.Article">
+    update article
+    set user_id = #{userId,jdbcType=BIGINT},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_views = #{articleViews,jdbcType=BIGINT},
+      article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+      article_date = #{articleDate,jdbcType=TIMESTAMP},
+      article_last_modify_date = #{articleLastModifyDate,jdbcType=TIMESTAMP},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.Article">
+    update article
+    set user_id = #{userId,jdbcType=BIGINT},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_views = #{articleViews,jdbcType=BIGINT},
+      article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+      article_date = #{articleDate,jdbcType=TIMESTAMP},
+      article_last_modify_date = #{articleLastModifyDate,jdbcType=TIMESTAMP}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+</mapper>

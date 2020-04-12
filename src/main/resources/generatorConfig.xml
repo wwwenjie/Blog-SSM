@@ -9,7 +9,7 @@
 
   <context id="default" targetRuntime="MyBatis3">
     <!--when suppress all comments, add this plugin to overwrite xml-->
-    <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+    <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
     <commentGenerator>
       <property name="suppressAllComments" value="true"/>
@@ -45,7 +45,33 @@
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
 
-    <table tableName="user_table" domainObjectName="User" mapperName="UserDao">
-    </table>
+    <table tableName="article" mapperName="ArticleDao"/>
+    <table tableName="article_category" mapperName="ArticleCategoryDao"
+           enableCountByExample="false"
+           enableUpdateByExample="false"
+           enableDeleteByExample="false"
+           enableSelectByExample="false"
+           selectByExampleQueryId="false"/>
+    <table tableName="article_label" mapperName="ArticleLabelDao"
+           enableCountByExample="false"
+           enableUpdateByExample="false"
+           enableDeleteByExample="false"
+           enableSelectByExample="false"
+           selectByExampleQueryId="false"/>
+    <table tableName="category" mapperName="CategoryDao"
+           enableCountByExample="false"
+           enableUpdateByExample="false"
+           enableDeleteByExample="false"
+           enableSelectByExample="false"
+           selectByExampleQueryId="false"/>
+    <table tableName="comment" mapperName="CommentDao"/>
+    <table tableName="label" mapperName="LabelDao"
+           enableCountByExample="false"
+           enableUpdateByExample="false"
+           enableDeleteByExample="false"
+           enableSelectByExample="false"
+           selectByExampleQueryId="false"/>
+    <table tableName="option" mapperName="OptionDao"/>
+    <table tableName="user" mapperName="UserDao"/>
   </context>
 </generatorConfiguration>

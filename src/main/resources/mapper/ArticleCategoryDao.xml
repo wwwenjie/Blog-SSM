@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.jinwenjie.dao.ArticleCategoryDao">
+  <resultMap id="BaseResultMap" type="me.jinwenjie.model.ArticleCategoryKey">
+    <constructor>
+      <idArg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="category_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="me.jinwenjie.model.ArticleCategoryKey">
+    delete from article_category
+    where article_id = #{articleId,jdbcType=BIGINT}
+      and category_id = #{categoryId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="me.jinwenjie.model.ArticleCategoryKey">
+    insert into article_category (article_id, category_id)
+    values (#{articleId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="me.jinwenjie.model.ArticleCategoryKey">
+    insert into article_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
