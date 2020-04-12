@@ -3,4 +3,4 @@ Personal blog built by Spring. Due to course restrictions, use SSM temporarily. 
 - Simple
 - RWD
 - REST
-- Ali OSS
+- Serverless
