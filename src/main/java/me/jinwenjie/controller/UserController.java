@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable("id") Integer id) {
+    public User getUserById(@PathVariable("id") Long id) {
         return userService.get(id);
     }
 
@@ -33,28 +33,28 @@ public class UserController {
             userService.create(user);
             map.put("success", true);
         } catch (Exception e) {
-            map.put("error", "fail to create uesr: " + user.getName() + ", error: " + e.getMessage());
+            map.put("error", "fail to create uesr: " + user.getUserName() + ", error: " + e.getMessage());
             map.put("code", 501);
         }
         return map;
     }
 
     @PutMapping("/users/{id}")
-    public Map<String, Object> updateUserById(@PathVariable("id") Integer id, @RequestBody User user) {
+    public Map<String, Object> updateUserById(@PathVariable("id") Long id, @RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
         try {
-            user.setId(id);
+            user.setUserId(id);
             userService.update(user);
             map.put("success", true);
         } catch (Exception e) {
-            map.put("error", "fail to update user: " + user.getName() + ", error: " + e.getMessage());
+            map.put("error", "fail to update user: " + user.getUserName() + ", error: " + e.getMessage());
             map.put("code", 501);
         }
         return map;
     }
 
     @DeleteMapping("/user/{id}")
-    public Map<String, Object> deleteUserById(@PathVariable("id") Integer id) {
+    public Map<String, Object> deleteUserById(@PathVariable("id") Long id) {
         Map<String, Object> map = new HashMap<>();
         try {
             userService.delete(id);

@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(Integer id) {
+    public User get(Long id) {
         return userDao.selectByPrimaryKey(id);
     }
 
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean delete(Long id) {
         return userDao.deleteByPrimaryKey(id) == 1;
     }
 }
