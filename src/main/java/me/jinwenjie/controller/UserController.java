@@ -34,7 +34,7 @@ public class UserController {
             map.put("success", true);
         } catch (Exception e) {
             map.put("error", "fail to create uesr: " + user.getUserName() + ", error: " + e.getMessage());
-            map.put("code", 501);
+            map.put("code", 500);
         }
         return map;
     }
@@ -48,12 +48,12 @@ public class UserController {
             map.put("success", true);
         } catch (Exception e) {
             map.put("error", "fail to update user: " + user.getUserName() + ", error: " + e.getMessage());
-            map.put("code", 501);
+            map.put("code", 500);
         }
         return map;
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/users/{id}")
     public Map<String, Object> deleteUserById(@PathVariable("id") Long id) {
         Map<String, Object> map = new HashMap<>();
         try {
@@ -61,7 +61,7 @@ public class UserController {
             map.put("success", true);
         } catch (Exception e) {
             map.put("error", "fail to delete uid: " + id + ", error: " + e.getMessage());
-            map.put("code", 501);
+            map.put("code", 500);
         }
         return map;
     }
