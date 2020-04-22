@@ -1,17 +1,38 @@
 package me.jinwenjie.service;
 
+import me.jinwenjie.dao.UserDao;
 import me.jinwenjie.model.User;
+import me.jinwenjie.model.UserExample;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface UserService {
-    List<User> list();
+@Service
+public class UserService {
+    private final UserDao userDao;
 
-    User get(Long id);
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
-    boolean create(User user);
+    public List<User> list() {
+        UserExample example = new UserExample();
+        return userDao.selectByExample(example);
+    }
 
-    boolean update(User user);
+    public User get(Long id) {
+        return userDao.selectByPrimaryKey(id);
+    }
 
-    boolean delete(Long id);
+    public boolean create(User user) {
+        return userDao.insert(user) == 1;
+    }
+
+    public boolean update(User user) {
+        return userDao.updateByPrimaryKeySelective(user) == 1;
+    }
+
+    public boolean delete(Long id) {
+        return userDao.deleteByPrimaryKey(id) == 1;
+    }
 }
