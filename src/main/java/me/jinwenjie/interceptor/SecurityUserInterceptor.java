@@ -13,9 +13,19 @@ public class SecurityUserInterceptor implements HandlerInterceptor {
         // Bearer xxx
         String token = request.getHeader("Authorization");
         token = token == null ? "" : token.split(" ")[1];
-        // request users, directly check admin
+        // URI: /users
         if (request.getRequestURI().equals("/users")) {
-            return JwtUtil.checkAdmin(token);
+            switch (method) {
+                // admin
+                case "GET":
+                    return JwtUtil.checkAdmin(token);
+                // everyone
+                case "POST":
+                    return true;
+                // refuse others
+                default:
+                    return false;
+            }
         }
         // URI: /users/uid
         Integer uid = Integer.parseInt(request.getRequestURI().split("/")[2]);
@@ -24,9 +34,6 @@ public class SecurityUserInterceptor implements HandlerInterceptor {
             case "GET":
             case "PUT":
                 return JwtUtil.getUserId(token).equals(uid) || JwtUtil.checkAdmin(token);
-            // everyone
-            case "POST":
-                return true;
             // admin
             case "DELETED":
                 return JwtUtil.checkAdmin(token);
