@@ -16,7 +16,20 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
-    @Override   
+    @Override
+    public Long login(String email, String password) {
+        // todo: encrypt
+        UserExample example = new UserExample();
+        example.or().andUserEmailEqualTo(email).andUserPasswordEqualTo(password);
+        List<User> resultList = userDao.selectByExample(example);
+        if (resultList.isEmpty()) {
+            return null;
+        } else {
+            return resultList.get(0).getUserId();
+        }
+    }
+
+    @Override
     public List<User> list() {
         UserExample example = new UserExample();
         return userDao.selectByExample(example);

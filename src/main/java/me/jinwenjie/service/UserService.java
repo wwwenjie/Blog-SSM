@@ -5,6 +5,8 @@ import me.jinwenjie.model.User;
 import java.util.List;
 
 public interface UserService {
+    Long login(String email, String password);
+
     List<User> list();
 
     User get(Long id);
