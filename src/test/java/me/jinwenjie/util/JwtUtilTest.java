@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class JwtUtilTest {
 
-    final Integer UID = (int) (Math.random() * 10000);
+    final Long UID = (long) (Math.random() * 10000);
 
     @Test
     public void sign() {

@@ -18,17 +18,17 @@ public class JwtUtil {
     private static final long EXPIRE_TIME = 7 * 24 * 60 * 60 * 1000;
 
     // jwt sign normal user
-    public static String sign(Integer userId) {
+    public static String sign(Long userId) {
         return sign(userId, false, EXPIRE_TIME);
     }
 
     // jwt sign admin user
-    public static String sign(Integer userId, Boolean admin) {
+    public static String sign(Long userId, Boolean admin) {
         return sign(userId, admin, EXPIRE_TIME);
     }
 
     // jwt sign full
-    public static String sign(Integer userId, Boolean admin, long expireTime) {
+    public static String sign(Long userId, Boolean admin, long expireTime) {
         try {
             Date date = new Date(System.currentTimeMillis() + expireTime);
             Algorithm algorithmHS = Algorithm.HMAC256(SECRET);
