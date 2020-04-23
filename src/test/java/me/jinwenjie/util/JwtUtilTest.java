@@ -8,21 +8,6 @@ public class JwtUtilTest {
     final Long UID = (long) (Math.random() * 10000);
 
     @Test
-    public void sign() {
-        System.out.println(JwtUtil.sign(UID,true));
-    }
-
-    @Test
-    public void testSign() {
-        System.out.println(JwtUtil.sign(UID, true));
-    }
-
-    @Test
-    public void testSign1() {
-        System.out.println(JwtUtil.sign(UID, true, 5000));
-    }
-
-    @Test
     public void verify() {
         String token = JwtUtil.sign(UID);
         Assert.assertTrue(JwtUtil.verify(token));

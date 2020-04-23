@@ -51,12 +51,12 @@ public class JwtUtil {
         }
     }
 
-    public static Integer getUserId(String token) {
+    public static Long getUserId(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim(USERID).asInt();
+            return jwt.getClaim(USERID).asLong();
         } catch (Exception e) {
-            return -1;
+            return (long) -1;
         }
     }
 
