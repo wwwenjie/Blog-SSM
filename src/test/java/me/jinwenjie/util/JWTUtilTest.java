@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class JWTUtilTest {
 
-    final Long UID = (long) (Math.random() * 10000);
+    final Integer UID = (int) (Math.random() * 10000);
 
     @Test
     public void verify() {

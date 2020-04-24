@@ -18,17 +18,17 @@ public class JWTUtil {
     private static final long EXPIRE_TIME = 7 * 24 * 60 * 60 * 1000;
 
     // jwt sign normal user
-    public static String sign(Long userId) {
+    public static String sign(Integer userId) {
         return sign(userId, false, EXPIRE_TIME);
     }
 
     // jwt sign admin user
-    public static String sign(Long userId, Boolean admin) {
+    public static String sign(Integer userId, Boolean admin) {
         return sign(userId, admin, EXPIRE_TIME);
     }
 
     // jwt sign full
-    public static String sign(Long userId, Boolean admin, long expireTime) {
+    public static String sign(Integer userId, Boolean admin, long expireTime) {
         try {
             Date date = new Date(System.currentTimeMillis() + expireTime);
             Algorithm algorithmHS = Algorithm.HMAC256(SECRET);
@@ -51,12 +51,12 @@ public class JWTUtil {
         }
     }
 
-    public static Long getUserId(String token) {
+    public static Integer getUserId(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim(USERID).asLong();
+            return jwt.getClaim(USERID).asInt();
         } catch (Exception e) {
-            return (long) -1;
+            return -1;
         }
     }
 

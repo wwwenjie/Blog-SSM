@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/tokens")
     public JSONObject login(@RequestBody User user) {
-        Long uid = userService.getLoginUid(user.getUserEmail(), user.getUserPassword());
+        Integer uid = userService.getLoginUid(user.getUserEmail(), user.getUserPassword());
         if (uid != null) {
             if (userService.getAdminEmail().equals(user.getUserEmail())) {
                 System.out.println("admin");
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable("id") Long id) {
+    public User getUserById(@PathVariable("id") Integer id) {
         return userService.get(id);
     }
 
@@ -57,14 +57,14 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public JSONObject updateUserById(@PathVariable("id") Long id, @RequestBody User user) {
+    public JSONObject updateUserById(@PathVariable("id") Integer id, @RequestBody User user) {
         user.setUserId(id);
         userService.update(user);
         return JSONResult.success();
     }
 
     @DeleteMapping("/users/{id}")
-    public JSONObject deleteUserById(@PathVariable("id") Long id) {
+    public JSONObject deleteUserById(@PathVariable("id") Integer id) {
         userService.delete(id);
         return JSONResult.success();
     }

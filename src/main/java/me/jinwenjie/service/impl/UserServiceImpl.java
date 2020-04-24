@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long getLoginUid(String email, String password) {
+    public Integer getLoginUid(String email, String password) {
         // todo: encrypt
         UserExample example = new UserExample();
         example.or().andUserEmailEqualTo(email).andUserPasswordEqualTo(password);
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(Long id) {
+    public User get(Integer id) {
         return userDao.selectByPrimaryKey(id);
     }
 
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean delete(Integer id) {
         return userDao.deleteByPrimaryKey(id) == 1;
     }
 }
