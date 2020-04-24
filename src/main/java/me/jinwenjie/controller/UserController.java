@@ -4,8 +4,8 @@ import me.jinwenjie.errorhandle.CustomException;
 import me.jinwenjie.errorhandle.ExceptionEnum;
 import me.jinwenjie.model.User;
 import me.jinwenjie.service.UserService;
-import me.jinwenjie.util.JsonResult;
-import me.jinwenjie.util.JwtUtil;
+import me.jinwenjie.util.JSONResult;
+import me.jinwenjie.util.JWTUtil;
 import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +26,7 @@ public class UserController {
     public JSONObject login(@RequestBody User user) {
         Long uid = userService.login(user.getUserEmail(), user.getUserPassword());
         if (uid != null) {
-            return JsonResult.singleResult("token", JwtUtil.sign(uid));
+            return JSONResult.singleResult("token", JWTUtil.sign(uid));
         } else {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_WRONG);
         }
@@ -47,19 +47,19 @@ public class UserController {
         user.setUserRegistrationDate(new Date());
         user.setUserIp(request.getRemoteAddr());
         userService.create(user);
-        return JsonResult.success();
+        return JSONResult.success();
     }
 
     @PutMapping("/users/{id}")
     public JSONObject updateUserById(@PathVariable("id") Long id, @RequestBody User user) {
         user.setUserId(id);
         userService.update(user);
-        return JsonResult.success();
+        return JSONResult.success();
     }
 
     @DeleteMapping("/users/{id}")
     public JSONObject deleteUserById(@PathVariable("id") Long id) {
         userService.delete(id);
-        return JsonResult.success();
+        return JSONResult.success();
     }
 }

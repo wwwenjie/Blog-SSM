@@ -1,6 +1,6 @@
 package me.jinwenjie.interceptor;
 
-import me.jinwenjie.util.JwtUtil;
+import me.jinwenjie.util.JWTUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
         if (method.equals("GET")) {
             return true;
         } else {
-            return token != null && JwtUtil.checkAdmin(token.split(" ")[1]);
+            return token != null && JWTUtil.checkAdmin(token.split(" ")[1]);
         }
     }
 }

@@ -8,7 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Date;
 
 // https://github.com/auth0/java-jwt
-public class JwtUtil {
+public class JWTUtil {
     private static final String SECRET = "KMHprIUvOvvFuCWa";
     private static final String USERID = "uid";
     private static final String ADMIN = "admin";

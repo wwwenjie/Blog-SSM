@@ -2,7 +2,7 @@ package me.jinwenjie.util;
 
 import net.sf.json.JSONObject;
 
-public class JsonResult {
+public class JSONResult {
     // operation success but dose not return data
     public static JSONObject success() {
         JSONObject success = new JSONObject();

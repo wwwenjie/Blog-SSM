@@ -1,6 +1,6 @@
 package me.jinwenjie.interceptor;
 
-import me.jinwenjie.util.JwtUtil;
+import me.jinwenjie.util.JWTUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ public class SecurityUserInterceptor implements HandlerInterceptor {
             switch (method) {
                 // admin
                 case "GET":
-                    return JwtUtil.checkAdmin(token);
+                    return JWTUtil.checkAdmin(token);
                 // everyone
                 case "POST":
                     return true;
@@ -33,10 +33,10 @@ public class SecurityUserInterceptor implements HandlerInterceptor {
             // user self or admin
             case "GET":
             case "PUT":
-                return JwtUtil.getUserId(token).equals(uid) || JwtUtil.checkAdmin(token);
+                return JWTUtil.getUserId(token).equals(uid) || JWTUtil.checkAdmin(token);
             // admin
             case "DELETED":
-                return JwtUtil.checkAdmin(token);
+                return JWTUtil.checkAdmin(token);
             // refuse others
             default:
                 return false;
