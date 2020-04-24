@@ -1,16 +1,21 @@
 package me.jinwenjie.controller;
 
+import me.jinwenjie.errorhandle.CustomException;
+import me.jinwenjie.errorhandle.ExceptionEnum;
 import me.jinwenjie.model.User;
 import me.jinwenjie.service.UserService;
+import me.jinwenjie.util.JsonResult;
 import me.jinwenjie.util.JwtUtil;
+import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class UserController {
+
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -18,17 +23,13 @@ public class UserController {
     }
 
     @PostMapping("/tokens")
-    public Map<String, Object> login(@RequestBody User user) {
-        Map<String, Object> map = new HashMap<>();
+    public JSONObject login(@RequestBody User user) {
         Long uid = userService.login(user.getUserEmail(), user.getUserPassword());
         if (uid != null) {
-            map.put("success", true);
-            map.put("token", JwtUtil.sign(uid));
+            return JsonResult.singleResult("token", JwtUtil.sign(uid));
         } else {
-            map.put("error", "email or password wrong");
-            map.put("code", 403);
+            throw new CustomException(ExceptionEnum.USER_ACCOUNT_WRONG);
         }
-        return map;
     }
 
     @GetMapping("/users")
@@ -42,47 +43,23 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public Map<String, Object> creatUser(@RequestBody User user) {
-        Map<String, Object> map = new HashMap<>();
-        // todo: throw sql error to interceptor
-        try {
-            if (userService.create(user)) {
-                map.put("success", true);
-            } else {
-                map.put("error", "fail to create user: database return 0 ");
-                map.put("code", 500);
-            }
-        } catch (Exception e) {
-            map.put("error", "fail to create user: " + user.getUserName() + ", error: " + e.getMessage());
-            map.put("code", 500);
-        }
-        return map;
+    public JSONObject creatUser(@RequestBody User user, HttpServletRequest request) {
+        user.setUserRegistrationDate(new Date());
+        user.setUserIp(request.getRemoteAddr());
+        userService.create(user);
+        return JsonResult.success();
     }
 
     @PutMapping("/users/{id}")
-    public Map<String, Object> updateUserById(@PathVariable("id") Long id, @RequestBody User user) {
-        Map<String, Object> map = new HashMap<>();
-        try {
-            user.setUserId(id);
-            userService.update(user);
-            map.put("success", true);
-        } catch (Exception e) {
-            map.put("error", "fail to update user: " + user.getUserName() + ", error: " + e.getMessage());
-            map.put("code", 500);
-        }
-        return map;
+    public JSONObject updateUserById(@PathVariable("id") Long id, @RequestBody User user) {
+        user.setUserId(id);
+        userService.update(user);
+        return JsonResult.success();
     }
 
     @DeleteMapping("/users/{id}")
-    public Map<String, Object> deleteUserById(@PathVariable("id") Long id) {
-        Map<String, Object> map = new HashMap<>();
-        try {
-            userService.delete(id);
-            map.put("success", true);
-        } catch (Exception e) {
-            map.put("error", "fail to delete uid: " + id + ", error: " + e.getMessage());
-            map.put("code", 500);
-        }
-        return map;
+    public JSONObject deleteUserById(@PathVariable("id") Long id) {
+        userService.delete(id);
+        return JsonResult.success();
     }
 }
