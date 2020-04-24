@@ -1,7 +1,8 @@
 package me.jinwenjie.util;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class JWTUtilTest {
 
@@ -10,9 +11,9 @@ public class JWTUtilTest {
     @Test
     public void verify() {
         String token = JWTUtil.sign(UID);
-        Assert.assertTrue(JWTUtil.verify(token));
+        assertTrue(JWTUtil.verify(token));
         token = "ajidwadmaskcl";
-        Assert.assertFalse(JWTUtil.verify(token));
+        assertFalse(JWTUtil.verify(token));
     }
 
     @Test
@@ -23,20 +24,20 @@ public class JWTUtilTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Assert.assertFalse(JWTUtil.verify(token));
+        assertFalse(JWTUtil.verify(token));
     }
 
     @Test
     public void getUserId() {
         String token = JWTUtil.sign(UID);
-        Assert.assertEquals(JWTUtil.getUserId(token), UID);
+        assertEquals(UID, JWTUtil.getUserId(token));
     }
 
     @Test
     public void checkAdmin() {
         String token = JWTUtil.sign(UID, false);
-        Assert.assertEquals(JWTUtil.checkAdmin(token), false);
+        assertEquals(false, JWTUtil.checkAdmin(token));
         token = JWTUtil.sign(UID, true);
-        Assert.assertEquals(JWTUtil.checkAdmin(token), true);
+        assertEquals(true, JWTUtil.checkAdmin(token));
     }
 }

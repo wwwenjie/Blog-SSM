@@ -15,5 +15,4 @@ public class UserServiceTest extends BaseTest {
     public void getAdminEmail() {
         assertEquals("admin", userService.getAdminEmail());
     }
-
 }

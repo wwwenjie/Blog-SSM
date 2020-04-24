@@ -20,9 +20,9 @@ public class CustomRestExceptionHandlerTest {
         ResponseEntity<Object> result = test.handleCustomerException(customError);
         ErrorDTO errorDTO = (ErrorDTO) result.getBody();
         assert errorDTO != null;
-        assertEquals(errorDTO.getCode(), ExceptionEnum.USER_ACCOUNT_WRONG.getCode());
-        assertEquals(errorDTO.getError(), ExceptionEnum.USER_ACCOUNT_WRONG.getError());
-        assertEquals(result.getStatusCode(), ExceptionEnum.USER_ACCOUNT_WRONG.getHttpStatus());
+        assertEquals(ExceptionEnum.USER_ACCOUNT_WRONG.getCode(), errorDTO.getCode());
+        assertEquals(ExceptionEnum.USER_ACCOUNT_WRONG.getError(), errorDTO.getError());
+        assertEquals(ExceptionEnum.USER_ACCOUNT_WRONG.getHttpStatus(), result.getStatusCode());
         assertNull(errorDTO.getDetail());
         // from custom
         customError.setCode(CODE);
@@ -31,9 +31,9 @@ public class CustomRestExceptionHandlerTest {
         result = test.handleCustomerException(customError);
         errorDTO = (ErrorDTO) result.getBody();
         assert errorDTO != null;
-        assertEquals(errorDTO.getCode(), CODE);
-        assertEquals(errorDTO.getError(), ERROR);
-        assertEquals(result.getStatusCode(), STATUS);
+        assertEquals(CODE, errorDTO.getCode());
+        assertEquals(ERROR, errorDTO.getError());
+        assertEquals(STATUS, result.getStatusCode());
         assertNull(errorDTO.getDetail());
     }
 
@@ -42,8 +42,8 @@ public class CustomRestExceptionHandlerTest {
         Exception exception = new Exception(ERROR);
         CustomRestExceptionHandler test = new CustomRestExceptionHandler();
         ErrorDTO errorDTO = test.handleUnexpectedException(exception);
-        assertEquals(errorDTO.getCode(), (Integer) 500);
-        assertEquals(errorDTO.getError(), ERROR);
-        assertEquals(errorDTO.getDetail(), "Unexpected error: " + exception);
+        assertEquals((Integer) 500, errorDTO.getCode());
+        assertEquals(ERROR, errorDTO.getError());
+        assertEquals("Unexpected error: " + exception, errorDTO.getDetail());
     }
 }
