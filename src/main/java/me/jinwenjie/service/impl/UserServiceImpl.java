@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
     public String getAdminEmail() {
         OptionExample example = new OptionExample();
         example.or().andOptionNameEqualTo("admin_email");
-        return optionDao.selectByExample(example).get(0).getOptionValue();
+        // add blob to load blob(option_value)
+        return optionDao.selectByExampleWithBLOBs(example).get(0).getOptionValue();
     }
 
     @Override
