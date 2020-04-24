@@ -115,52 +115,52 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdEqualTo(Long value) {
+        public Criteria andArticleIdEqualTo(Integer value) {
             addCriterion("article_id =", value, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdNotEqualTo(Long value) {
+        public Criteria andArticleIdNotEqualTo(Integer value) {
             addCriterion("article_id <>", value, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdGreaterThan(Long value) {
+        public Criteria andArticleIdGreaterThan(Integer value) {
             addCriterion("article_id >", value, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andArticleIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("article_id >=", value, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdLessThan(Long value) {
+        public Criteria andArticleIdLessThan(Integer value) {
             addCriterion("article_id <", value, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdLessThanOrEqualTo(Long value) {
+        public Criteria andArticleIdLessThanOrEqualTo(Integer value) {
             addCriterion("article_id <=", value, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdIn(List<Long> values) {
+        public Criteria andArticleIdIn(List<Integer> values) {
             addCriterion("article_id in", values, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdNotIn(List<Long> values) {
+        public Criteria andArticleIdNotIn(List<Integer> values) {
             addCriterion("article_id not in", values, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdBetween(Long value1, Long value2) {
+        public Criteria andArticleIdBetween(Integer value1, Integer value2) {
             addCriterion("article_id between", value1, value2, "articleId");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdNotBetween(Long value1, Long value2) {
+        public Criteria andArticleIdNotBetween(Integer value1, Integer value2) {
             addCriterion("article_id not between", value1, value2, "articleId");
             return (Criteria) this;
         }
@@ -175,52 +175,52 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserIdEqualTo(Long value) {
+        public Criteria andUserIdEqualTo(Integer value) {
             addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotEqualTo(Long value) {
+        public Criteria andUserIdNotEqualTo(Integer value) {
             addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThan(Long value) {
+        public Criteria andUserIdGreaterThan(Integer value) {
             addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThan(Long value) {
+        public Criteria andUserIdLessThan(Integer value) {
             addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThanOrEqualTo(Long value) {
+        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
             addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIn(List<Long> values) {
+        public Criteria andUserIdIn(List<Integer> values) {
             addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotIn(List<Long> values) {
+        public Criteria andUserIdNotIn(List<Integer> values) {
             addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdBetween(Long value1, Long value2) {
+        public Criteria andUserIdBetween(Integer value1, Integer value2) {
             addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotBetween(Long value1, Long value2) {
+        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
             addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
@@ -305,52 +305,52 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsEqualTo(Long value) {
+        public Criteria andArticleViewsEqualTo(Integer value) {
             addCriterion("article_views =", value, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsNotEqualTo(Long value) {
+        public Criteria andArticleViewsNotEqualTo(Integer value) {
             addCriterion("article_views <>", value, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsGreaterThan(Long value) {
+        public Criteria andArticleViewsGreaterThan(Integer value) {
             addCriterion("article_views >", value, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsGreaterThanOrEqualTo(Long value) {
+        public Criteria andArticleViewsGreaterThanOrEqualTo(Integer value) {
             addCriterion("article_views >=", value, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsLessThan(Long value) {
+        public Criteria andArticleViewsLessThan(Integer value) {
             addCriterion("article_views <", value, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsLessThanOrEqualTo(Long value) {
+        public Criteria andArticleViewsLessThanOrEqualTo(Integer value) {
             addCriterion("article_views <=", value, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsIn(List<Long> values) {
+        public Criteria andArticleViewsIn(List<Integer> values) {
             addCriterion("article_views in", values, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsNotIn(List<Long> values) {
+        public Criteria andArticleViewsNotIn(List<Integer> values) {
             addCriterion("article_views not in", values, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsBetween(Long value1, Long value2) {
+        public Criteria andArticleViewsBetween(Integer value1, Integer value2) {
             addCriterion("article_views between", value1, value2, "articleViews");
             return (Criteria) this;
         }
 
-        public Criteria andArticleViewsNotBetween(Long value1, Long value2) {
+        public Criteria andArticleViewsNotBetween(Integer value1, Integer value2) {
             addCriterion("article_views not between", value1, value2, "articleViews");
             return (Criteria) this;
         }
@@ -365,52 +365,52 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountEqualTo(Long value) {
+        public Criteria andArticleCommentCountEqualTo(Integer value) {
             addCriterion("article_comment_count =", value, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountNotEqualTo(Long value) {
+        public Criteria andArticleCommentCountNotEqualTo(Integer value) {
             addCriterion("article_comment_count <>", value, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountGreaterThan(Long value) {
+        public Criteria andArticleCommentCountGreaterThan(Integer value) {
             addCriterion("article_comment_count >", value, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountGreaterThanOrEqualTo(Long value) {
+        public Criteria andArticleCommentCountGreaterThanOrEqualTo(Integer value) {
             addCriterion("article_comment_count >=", value, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountLessThan(Long value) {
+        public Criteria andArticleCommentCountLessThan(Integer value) {
             addCriterion("article_comment_count <", value, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountLessThanOrEqualTo(Long value) {
+        public Criteria andArticleCommentCountLessThanOrEqualTo(Integer value) {
             addCriterion("article_comment_count <=", value, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountIn(List<Long> values) {
+        public Criteria andArticleCommentCountIn(List<Integer> values) {
             addCriterion("article_comment_count in", values, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountNotIn(List<Long> values) {
+        public Criteria andArticleCommentCountNotIn(List<Integer> values) {
             addCriterion("article_comment_count not in", values, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountBetween(Long value1, Long value2) {
+        public Criteria andArticleCommentCountBetween(Integer value1, Integer value2) {
             addCriterion("article_comment_count between", value1, value2, "articleCommentCount");
             return (Criteria) this;
         }
 
-        public Criteria andArticleCommentCountNotBetween(Long value1, Long value2) {
+        public Criteria andArticleCommentCountNotBetween(Integer value1, Integer value2) {
             addCriterion("article_comment_count not between", value1, value2, "articleCommentCount");
             return (Criteria) this;
         }

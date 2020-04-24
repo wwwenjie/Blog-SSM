@@ -10,7 +10,7 @@ public interface CommentDao {
 
     int deleteByExample(CommentExample example);
 
-    int deleteByPrimaryKey(Long commentId);
+    int deleteByPrimaryKey(Integer commentId);
 
     int insert(Comment record);
 
@@ -20,7 +20,7 @@ public interface CommentDao {
 
     List<Comment> selectByExample(CommentExample example);
 
-    Comment selectByPrimaryKey(Long commentId);
+    Comment selectByPrimaryKey(Integer commentId);
 
     int updateByExampleSelective(@Param("record") Comment record, @Param("example") CommentExample example);
 

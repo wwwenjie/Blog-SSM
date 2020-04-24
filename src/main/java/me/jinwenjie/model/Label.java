@@ -1,7 +1,7 @@
 package me.jinwenjie.model;
 
 public class Label {
-    private Long labelId;
+    private Integer labelId;
 
     private String labelName;
 
@@ -9,7 +9,7 @@ public class Label {
 
     private String labelDescription;
 
-    public Label(Long labelId, String labelName, String labelAlias, String labelDescription) {
+    public Label(Integer labelId, String labelName, String labelAlias, String labelDescription) {
         this.labelId = labelId;
         this.labelName = labelName;
         this.labelAlias = labelAlias;
@@ -20,11 +20,11 @@ public class Label {
         super();
     }
 
-    public Long getLabelId() {
+    public Integer getLabelId() {
         return labelId;
     }
 
-    public void setLabelId(Long labelId) {
+    public void setLabelId(Integer labelId) {
         this.labelId = labelId;
     }
 

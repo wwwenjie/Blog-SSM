@@ -3,15 +3,15 @@ package me.jinwenjie.model;
 import java.util.Date;
 
 public class Article {
-    private Long articleId;
+    private Integer articleId;
 
-    private Long userId;
+    private Integer userId;
 
     private String articleTitle;
 
-    private Long articleViews;
+    private Integer articleViews;
 
-    private Long articleCommentCount;
+    private Integer articleCommentCount;
 
     private Date articleDate;
 
@@ -19,7 +19,7 @@ public class Article {
 
     private String articleContent;
 
-    public Article(Long articleId, Long userId, String articleTitle, Long articleViews, Long articleCommentCount, Date articleDate, Date articleLastModifyDate) {
+    public Article(Integer articleId, Integer userId, String articleTitle, Integer articleViews, Integer articleCommentCount, Date articleDate, Date articleLastModifyDate) {
         this.articleId = articleId;
         this.userId = userId;
         this.articleTitle = articleTitle;
@@ -29,7 +29,7 @@ public class Article {
         this.articleLastModifyDate = articleLastModifyDate;
     }
 
-    public Article(Long articleId, Long userId, String articleTitle, Long articleViews, Long articleCommentCount, Date articleDate, Date articleLastModifyDate, String articleContent) {
+    public Article(Integer articleId, Integer userId, String articleTitle, Integer articleViews, Integer articleCommentCount, Date articleDate, Date articleLastModifyDate, String articleContent) {
         this.articleId = articleId;
         this.userId = userId;
         this.articleTitle = articleTitle;
@@ -44,19 +44,19 @@ public class Article {
         super();
     }
 
-    public Long getArticleId() {
+    public Integer getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Long articleId) {
+    public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -68,19 +68,19 @@ public class Article {
         this.articleTitle = articleTitle == null ? null : articleTitle.trim();
     }
 
-    public Long getArticleViews() {
+    public Integer getArticleViews() {
         return articleViews;
     }
 
-    public void setArticleViews(Long articleViews) {
+    public void setArticleViews(Integer articleViews) {
         this.articleViews = articleViews;
     }
 
-    public Long getArticleCommentCount() {
+    public Integer getArticleCommentCount() {
         return articleCommentCount;
     }
 
-    public void setArticleCommentCount(Long articleCommentCount) {
+    public void setArticleCommentCount(Integer articleCommentCount) {
         this.articleCommentCount = articleCommentCount;
     }
 

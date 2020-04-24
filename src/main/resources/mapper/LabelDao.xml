@@ -3,7 +3,7 @@
 <mapper namespace="me.jinwenjie.dao.LabelDao">
   <resultMap id="BaseResultMap" type="me.jinwenjie.model.Label">
     <constructor>
-      <idArg column="label_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="label_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="label_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="label_alias" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="label_description" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -12,20 +12,20 @@
   <sql id="Base_Column_List">
     label_id, label_name, label_alias, label_description
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from label
-    where label_id = #{labelId,jdbcType=BIGINT}
+    where label_id = #{labelId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from label
-    where label_id = #{labelId,jdbcType=BIGINT}
+    where label_id = #{labelId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="me.jinwenjie.model.Label">
     insert into label (label_id, label_name, label_alias, 
       label_description)
-    values (#{labelId,jdbcType=BIGINT}, #{labelName,jdbcType=VARCHAR}, #{labelAlias,jdbcType=VARCHAR}, 
+    values (#{labelId,jdbcType=INTEGER}, #{labelName,jdbcType=VARCHAR}, #{labelAlias,jdbcType=VARCHAR}, 
       #{labelDescription,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="me.jinwenjie.model.Label">
@@ -46,7 +46,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="labelId != null">
-        #{labelId,jdbcType=BIGINT},
+        #{labelId,jdbcType=INTEGER},
       </if>
       <if test="labelName != null">
         #{labelName,jdbcType=VARCHAR},
@@ -72,13 +72,13 @@
         label_description = #{labelDescription,jdbcType=VARCHAR},
       </if>
     </set>
-    where label_id = #{labelId,jdbcType=BIGINT}
+    where label_id = #{labelId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.Label">
     update label
     set label_name = #{labelName,jdbcType=VARCHAR},
       label_alias = #{labelAlias,jdbcType=VARCHAR},
       label_description = #{labelDescription,jdbcType=VARCHAR}
-    where label_id = #{labelId,jdbcType=BIGINT}
+    where label_id = #{labelId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -3,23 +3,23 @@ package me.jinwenjie.model;
 import java.util.Date;
 
 public class Comment {
-    private Long commentId;
+    private Integer commentId;
 
-    private Long userId;
+    private Integer userId;
 
     private String userName;
 
     private String userIp;
 
-    private Long articleId;
+    private Integer articleId;
 
     private Date commentDate;
 
-    private Long parentCommentId;
+    private Integer parentCommentId;
 
     private String commentContent;
 
-    public Comment(Long commentId, Long userId, String userName, String userIp, Long articleId, Date commentDate, Long parentCommentId) {
+    public Comment(Integer commentId, Integer userId, String userName, String userIp, Integer articleId, Date commentDate, Integer parentCommentId) {
         this.commentId = commentId;
         this.userId = userId;
         this.userName = userName;
@@ -29,7 +29,7 @@ public class Comment {
         this.parentCommentId = parentCommentId;
     }
 
-    public Comment(Long commentId, Long userId, String userName, String userIp, Long articleId, Date commentDate, Long parentCommentId, String commentContent) {
+    public Comment(Integer commentId, Integer userId, String userName, String userIp, Integer articleId, Date commentDate, Integer parentCommentId, String commentContent) {
         this.commentId = commentId;
         this.userId = userId;
         this.userName = userName;
@@ -44,19 +44,19 @@ public class Comment {
         super();
     }
 
-    public Long getCommentId() {
+    public Integer getCommentId() {
         return commentId;
     }
 
-    public void setCommentId(Long commentId) {
+    public void setCommentId(Integer commentId) {
         this.commentId = commentId;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -76,11 +76,11 @@ public class Comment {
         this.userIp = userIp == null ? null : userIp.trim();
     }
 
-    public Long getArticleId() {
+    public Integer getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Long articleId) {
+    public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
 
@@ -92,11 +92,11 @@ public class Comment {
         this.commentDate = commentDate;
     }
 
-    public Long getParentCommentId() {
+    public Integer getParentCommentId() {
         return parentCommentId;
     }
 
-    public void setParentCommentId(Long parentCommentId) {
+    public void setParentCommentId(Integer parentCommentId) {
         this.parentCommentId = parentCommentId;
     }
 

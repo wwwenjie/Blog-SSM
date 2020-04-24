@@ -3,22 +3,22 @@
 <mapper namespace="me.jinwenjie.dao.ArticleDao">
   <resultMap id="BaseResultMap" type="me.jinwenjie.model.Article">
     <constructor>
-      <idArg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="article_title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="article_views" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="article_comment_count" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_views" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="article_comment_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="article_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="article_last_modify_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="me.jinwenjie.model.Article">
     <constructor>
-      <idArg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="article_title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="article_views" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="article_comment_count" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_views" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="article_comment_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="article_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="article_last_modify_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="article_content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
@@ -119,17 +119,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from article
-    where article_id = #{articleId,jdbcType=BIGINT}
+    where article_id = #{articleId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
-    where article_id = #{articleId,jdbcType=BIGINT}
+    where article_id = #{articleId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="me.jinwenjie.model.ArticleExample">
     delete from article
@@ -142,8 +142,8 @@
       article_views, article_comment_count, article_date, 
       article_last_modify_date, article_content
       )
-    values (#{articleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, 
-      #{articleViews,jdbcType=BIGINT}, #{articleCommentCount,jdbcType=BIGINT}, #{articleDate,jdbcType=TIMESTAMP}, 
+    values (#{articleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR}, 
+      #{articleViews,jdbcType=INTEGER}, #{articleCommentCount,jdbcType=INTEGER}, #{articleDate,jdbcType=TIMESTAMP}, 
       #{articleLastModifyDate,jdbcType=TIMESTAMP}, #{articleContent,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -177,19 +177,19 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="articleId != null">
-        #{articleId,jdbcType=BIGINT},
+        #{articleId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="articleTitle != null">
         #{articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="articleViews != null">
-        #{articleViews,jdbcType=BIGINT},
+        #{articleViews,jdbcType=INTEGER},
       </if>
       <if test="articleCommentCount != null">
-        #{articleCommentCount,jdbcType=BIGINT},
+        #{articleCommentCount,jdbcType=INTEGER},
       </if>
       <if test="articleDate != null">
         #{articleDate,jdbcType=TIMESTAMP},
@@ -212,19 +212,19 @@
     update article
     <set>
       <if test="record.articleId != null">
-        article_id = #{record.articleId,jdbcType=BIGINT},
+        article_id = #{record.articleId,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.articleTitle != null">
         article_title = #{record.articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.articleViews != null">
-        article_views = #{record.articleViews,jdbcType=BIGINT},
+        article_views = #{record.articleViews,jdbcType=INTEGER},
       </if>
       <if test="record.articleCommentCount != null">
-        article_comment_count = #{record.articleCommentCount,jdbcType=BIGINT},
+        article_comment_count = #{record.articleCommentCount,jdbcType=INTEGER},
       </if>
       <if test="record.articleDate != null">
         article_date = #{record.articleDate,jdbcType=TIMESTAMP},
@@ -242,11 +242,11 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update article
-    set article_id = #{record.articleId,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
+    set article_id = #{record.articleId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
       article_title = #{record.articleTitle,jdbcType=VARCHAR},
-      article_views = #{record.articleViews,jdbcType=BIGINT},
-      article_comment_count = #{record.articleCommentCount,jdbcType=BIGINT},
+      article_views = #{record.articleViews,jdbcType=INTEGER},
+      article_comment_count = #{record.articleCommentCount,jdbcType=INTEGER},
       article_date = #{record.articleDate,jdbcType=TIMESTAMP},
       article_last_modify_date = #{record.articleLastModifyDate,jdbcType=TIMESTAMP},
       article_content = #{record.articleContent,jdbcType=LONGVARCHAR}
@@ -256,11 +256,11 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update article
-    set article_id = #{record.articleId,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
+    set article_id = #{record.articleId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
       article_title = #{record.articleTitle,jdbcType=VARCHAR},
-      article_views = #{record.articleViews,jdbcType=BIGINT},
-      article_comment_count = #{record.articleCommentCount,jdbcType=BIGINT},
+      article_views = #{record.articleViews,jdbcType=INTEGER},
+      article_comment_count = #{record.articleCommentCount,jdbcType=INTEGER},
       article_date = #{record.articleDate,jdbcType=TIMESTAMP},
       article_last_modify_date = #{record.articleLastModifyDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -271,16 +271,16 @@
     update article
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="articleTitle != null">
         article_title = #{articleTitle,jdbcType=VARCHAR},
       </if>
       <if test="articleViews != null">
-        article_views = #{articleViews,jdbcType=BIGINT},
+        article_views = #{articleViews,jdbcType=INTEGER},
       </if>
       <if test="articleCommentCount != null">
-        article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+        article_comment_count = #{articleCommentCount,jdbcType=INTEGER},
       </if>
       <if test="articleDate != null">
         article_date = #{articleDate,jdbcType=TIMESTAMP},
@@ -292,27 +292,27 @@
         article_content = #{articleContent,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where article_id = #{articleId,jdbcType=BIGINT}
+    where article_id = #{articleId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="me.jinwenjie.model.Article">
     update article
-    set user_id = #{userId,jdbcType=BIGINT},
+    set user_id = #{userId,jdbcType=INTEGER},
       article_title = #{articleTitle,jdbcType=VARCHAR},
-      article_views = #{articleViews,jdbcType=BIGINT},
-      article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+      article_views = #{articleViews,jdbcType=INTEGER},
+      article_comment_count = #{articleCommentCount,jdbcType=INTEGER},
       article_date = #{articleDate,jdbcType=TIMESTAMP},
       article_last_modify_date = #{articleLastModifyDate,jdbcType=TIMESTAMP},
       article_content = #{articleContent,jdbcType=LONGVARCHAR}
-    where article_id = #{articleId,jdbcType=BIGINT}
+    where article_id = #{articleId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.Article">
     update article
-    set user_id = #{userId,jdbcType=BIGINT},
+    set user_id = #{userId,jdbcType=INTEGER},
       article_title = #{articleTitle,jdbcType=VARCHAR},
-      article_views = #{articleViews,jdbcType=BIGINT},
-      article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+      article_views = #{articleViews,jdbcType=INTEGER},
+      article_comment_count = #{articleCommentCount,jdbcType=INTEGER},
       article_date = #{articleDate,jdbcType=TIMESTAMP},
       article_last_modify_date = #{articleLastModifyDate,jdbcType=TIMESTAMP}
-    where article_id = #{articleId,jdbcType=BIGINT}
+    where article_id = #{articleId,jdbcType=INTEGER}
   </update>
 </mapper>

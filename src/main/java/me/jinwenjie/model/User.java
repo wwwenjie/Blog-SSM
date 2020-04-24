@@ -3,7 +3,7 @@ package me.jinwenjie.model;
 import java.util.Date;
 
 public class User {
-    private Long userId;
+    private Integer userId;
 
     private String userName;
 
@@ -19,7 +19,7 @@ public class User {
 
     private Integer userTelephoneNumber;
 
-    public User(Long userId, String userName, String userPassword, String userEmail, String userProfilePhoto, Date userRegistrationDate, String userIp, Integer userTelephoneNumber) {
+    public User(Integer userId, String userName, String userPassword, String userEmail, String userProfilePhoto, Date userRegistrationDate, String userIp, Integer userTelephoneNumber) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -34,11 +34,11 @@ public class User {
         super();
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

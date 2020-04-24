@@ -1,11 +1,11 @@
 package me.jinwenjie.model;
 
 public class ArticleLabelKey {
-    private Long articleId;
+    private Integer articleId;
 
-    private Long labelId;
+    private Integer labelId;
 
-    public ArticleLabelKey(Long articleId, Long labelId) {
+    public ArticleLabelKey(Integer articleId, Integer labelId) {
         this.articleId = articleId;
         this.labelId = labelId;
     }
@@ -14,19 +14,19 @@ public class ArticleLabelKey {
         super();
     }
 
-    public Long getArticleId() {
+    public Integer getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Long articleId) {
+    public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
 
-    public Long getLabelId() {
+    public Integer getLabelId() {
         return labelId;
     }
 
-    public void setLabelId(Long labelId) {
+    public void setLabelId(Integer labelId) {
         this.labelId = labelId;
     }
 }

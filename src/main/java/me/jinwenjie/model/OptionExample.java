@@ -114,52 +114,52 @@ public class OptionExample {
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdEqualTo(Long value) {
+        public Criteria andOptionIdEqualTo(Integer value) {
             addCriterion("option_id =", value, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdNotEqualTo(Long value) {
+        public Criteria andOptionIdNotEqualTo(Integer value) {
             addCriterion("option_id <>", value, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdGreaterThan(Long value) {
+        public Criteria andOptionIdGreaterThan(Integer value) {
             addCriterion("option_id >", value, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andOptionIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("option_id >=", value, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdLessThan(Long value) {
+        public Criteria andOptionIdLessThan(Integer value) {
             addCriterion("option_id <", value, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdLessThanOrEqualTo(Long value) {
+        public Criteria andOptionIdLessThanOrEqualTo(Integer value) {
             addCriterion("option_id <=", value, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdIn(List<Long> values) {
+        public Criteria andOptionIdIn(List<Integer> values) {
             addCriterion("option_id in", values, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdNotIn(List<Long> values) {
+        public Criteria andOptionIdNotIn(List<Integer> values) {
             addCriterion("option_id not in", values, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdBetween(Long value1, Long value2) {
+        public Criteria andOptionIdBetween(Integer value1, Integer value2) {
             addCriterion("option_id between", value1, value2, "optionId");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIdNotBetween(Long value1, Long value2) {
+        public Criteria andOptionIdNotBetween(Integer value1, Integer value2) {
             addCriterion("option_id not between", value1, value2, "optionId");
             return (Criteria) this;
         }

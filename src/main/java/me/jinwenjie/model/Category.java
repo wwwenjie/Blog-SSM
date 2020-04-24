@@ -1,7 +1,7 @@
 package me.jinwenjie.model;
 
 public class Category {
-    private Long categoryId;
+    private Integer categoryId;
 
     private String categoryName;
 
@@ -9,7 +9,7 @@ public class Category {
 
     private String categoryDescription;
 
-    public Category(Long categoryId, String categoryName, String categoryAlias, String categoryDescription) {
+    public Category(Integer categoryId, String categoryName, String categoryAlias, String categoryDescription) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryAlias = categoryAlias;
@@ -20,11 +20,11 @@ public class Category {
         super();
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 

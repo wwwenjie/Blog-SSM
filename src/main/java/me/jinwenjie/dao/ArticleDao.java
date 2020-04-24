@@ -10,7 +10,7 @@ public interface ArticleDao {
 
     int deleteByExample(ArticleExample example);
 
-    int deleteByPrimaryKey(Long articleId);
+    int deleteByPrimaryKey(Integer articleId);
 
     int insert(Article record);
 
@@ -20,7 +20,7 @@ public interface ArticleDao {
 
     List<Article> selectByExample(ArticleExample example);
 
-    Article selectByPrimaryKey(Long articleId);
+    Article selectByPrimaryKey(Integer articleId);
 
     int updateByExampleSelective(@Param("record") Article record, @Param("example") ArticleExample example);
 

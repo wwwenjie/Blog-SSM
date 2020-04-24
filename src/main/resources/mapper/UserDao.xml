@@ -3,7 +3,7 @@
 <mapper namespace="me.jinwenjie.dao.UserDao">
   <resultMap id="BaseResultMap" type="me.jinwenjie.model.User">
     <constructor>
-      <idArg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -89,15 +89,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
-    where user_id = #{userId,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
-    where user_id = #{userId,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="me.jinwenjie.model.UserExample">
     delete from user
@@ -109,7 +109,7 @@
     insert into user (user_id, user_name, user_password, 
       user_email, user_profile_photo, user_registration_date, 
       user_ip, user_telephone_number)
-    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
       #{userEmail,jdbcType=VARCHAR}, #{userProfilePhoto,jdbcType=VARCHAR}, #{userRegistrationDate,jdbcType=TIMESTAMP}, 
       #{userIp,jdbcType=VARCHAR}, #{userTelephoneNumber,jdbcType=INTEGER})
   </insert>
@@ -143,7 +143,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -178,7 +178,7 @@
     update user
     <set>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user
-    set user_id = #{record.userId,jdbcType=BIGINT},
+    set user_id = #{record.userId,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_password = #{record.userPassword,jdbcType=VARCHAR},
       user_email = #{record.userEmail,jdbcType=VARCHAR},
@@ -245,7 +245,7 @@
         user_telephone_number = #{userTelephoneNumber,jdbcType=INTEGER},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.User">
     update user
@@ -256,6 +256,6 @@
       user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
       user_ip = #{userIp,jdbcType=VARCHAR},
       user_telephone_number = #{userTelephoneNumber,jdbcType=INTEGER}
-    where user_id = #{userId,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

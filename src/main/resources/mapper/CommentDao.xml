@@ -3,24 +3,24 @@
 <mapper namespace="me.jinwenjie.dao.CommentDao">
   <resultMap id="BaseResultMap" type="me.jinwenjie.model.Comment">
     <constructor>
-      <idArg column="comment_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="comment_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="comment_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="parent_comment_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="parent_comment_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="me.jinwenjie.model.Comment">
     <constructor>
-      <idArg column="comment_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="comment_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="comment_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="parent_comment_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="parent_comment_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="comment_content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
     </constructor>
   </resultMap>
@@ -118,17 +118,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from comment
-    where comment_id = #{commentId,jdbcType=BIGINT}
+    where comment_id = #{commentId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comment
-    where comment_id = #{commentId,jdbcType=BIGINT}
+    where comment_id = #{commentId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="me.jinwenjie.model.CommentExample">
     delete from comment
@@ -140,9 +140,9 @@
     insert into comment (comment_id, user_id, user_name, 
       user_ip, article_id, comment_date, 
       parent_comment_id, comment_content)
-    values (#{commentId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, 
-      #{userIp,jdbcType=VARCHAR}, #{articleId,jdbcType=BIGINT}, #{commentDate,jdbcType=TIMESTAMP}, 
-      #{parentCommentId,jdbcType=BIGINT}, #{commentContent,jdbcType=LONGVARCHAR})
+    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{userIp,jdbcType=VARCHAR}, #{articleId,jdbcType=INTEGER}, #{commentDate,jdbcType=TIMESTAMP}, 
+      #{parentCommentId,jdbcType=INTEGER}, #{commentContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="me.jinwenjie.model.Comment">
     insert into comment
@@ -174,10 +174,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="commentId != null">
-        #{commentId,jdbcType=BIGINT},
+        #{commentId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -186,13 +186,13 @@
         #{userIp,jdbcType=VARCHAR},
       </if>
       <if test="articleId != null">
-        #{articleId,jdbcType=BIGINT},
+        #{articleId,jdbcType=INTEGER},
       </if>
       <if test="commentDate != null">
         #{commentDate,jdbcType=TIMESTAMP},
       </if>
       <if test="parentCommentId != null">
-        #{parentCommentId,jdbcType=BIGINT},
+        #{parentCommentId,jdbcType=INTEGER},
       </if>
       <if test="commentContent != null">
         #{commentContent,jdbcType=LONGVARCHAR},
@@ -209,10 +209,10 @@
     update comment
     <set>
       <if test="record.commentId != null">
-        comment_id = #{record.commentId,jdbcType=BIGINT},
+        comment_id = #{record.commentId,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
@@ -221,13 +221,13 @@
         user_ip = #{record.userIp,jdbcType=VARCHAR},
       </if>
       <if test="record.articleId != null">
-        article_id = #{record.articleId,jdbcType=BIGINT},
+        article_id = #{record.articleId,jdbcType=INTEGER},
       </if>
       <if test="record.commentDate != null">
         comment_date = #{record.commentDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.parentCommentId != null">
-        parent_comment_id = #{record.parentCommentId,jdbcType=BIGINT},
+        parent_comment_id = #{record.parentCommentId,jdbcType=INTEGER},
       </if>
       <if test="record.commentContent != null">
         comment_content = #{record.commentContent,jdbcType=LONGVARCHAR},
@@ -239,13 +239,13 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update comment
-    set comment_id = #{record.commentId,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
+    set comment_id = #{record.commentId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_ip = #{record.userIp,jdbcType=VARCHAR},
-      article_id = #{record.articleId,jdbcType=BIGINT},
+      article_id = #{record.articleId,jdbcType=INTEGER},
       comment_date = #{record.commentDate,jdbcType=TIMESTAMP},
-      parent_comment_id = #{record.parentCommentId,jdbcType=BIGINT},
+      parent_comment_id = #{record.parentCommentId,jdbcType=INTEGER},
       comment_content = #{record.commentContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -253,13 +253,13 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update comment
-    set comment_id = #{record.commentId,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
+    set comment_id = #{record.commentId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_ip = #{record.userIp,jdbcType=VARCHAR},
-      article_id = #{record.articleId,jdbcType=BIGINT},
+      article_id = #{record.articleId,jdbcType=INTEGER},
       comment_date = #{record.commentDate,jdbcType=TIMESTAMP},
-      parent_comment_id = #{record.parentCommentId,jdbcType=BIGINT}
+      parent_comment_id = #{record.parentCommentId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -268,7 +268,7 @@
     update comment
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
@@ -277,39 +277,39 @@
         user_ip = #{userIp,jdbcType=VARCHAR},
       </if>
       <if test="articleId != null">
-        article_id = #{articleId,jdbcType=BIGINT},
+        article_id = #{articleId,jdbcType=INTEGER},
       </if>
       <if test="commentDate != null">
         comment_date = #{commentDate,jdbcType=TIMESTAMP},
       </if>
       <if test="parentCommentId != null">
-        parent_comment_id = #{parentCommentId,jdbcType=BIGINT},
+        parent_comment_id = #{parentCommentId,jdbcType=INTEGER},
       </if>
       <if test="commentContent != null">
         comment_content = #{commentContent,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where comment_id = #{commentId,jdbcType=BIGINT}
+    where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="me.jinwenjie.model.Comment">
     update comment
-    set user_id = #{userId,jdbcType=BIGINT},
+    set user_id = #{userId,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},
       user_ip = #{userIp,jdbcType=VARCHAR},
-      article_id = #{articleId,jdbcType=BIGINT},
+      article_id = #{articleId,jdbcType=INTEGER},
       comment_date = #{commentDate,jdbcType=TIMESTAMP},
-      parent_comment_id = #{parentCommentId,jdbcType=BIGINT},
+      parent_comment_id = #{parentCommentId,jdbcType=INTEGER},
       comment_content = #{commentContent,jdbcType=LONGVARCHAR}
-    where comment_id = #{commentId,jdbcType=BIGINT}
+    where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.Comment">
     update comment
-    set user_id = #{userId,jdbcType=BIGINT},
+    set user_id = #{userId,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},
       user_ip = #{userIp,jdbcType=VARCHAR},
-      article_id = #{articleId,jdbcType=BIGINT},
+      article_id = #{articleId,jdbcType=INTEGER},
       comment_date = #{commentDate,jdbcType=TIMESTAMP},
-      parent_comment_id = #{parentCommentId,jdbcType=BIGINT}
-    where comment_id = #{commentId,jdbcType=BIGINT}
+      parent_comment_id = #{parentCommentId,jdbcType=INTEGER}
+    where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
 </mapper>

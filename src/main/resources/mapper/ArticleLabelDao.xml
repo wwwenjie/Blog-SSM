@@ -3,18 +3,18 @@
 <mapper namespace="me.jinwenjie.dao.ArticleLabelDao">
   <resultMap id="BaseResultMap" type="me.jinwenjie.model.ArticleLabelKey">
     <constructor>
-      <idArg column="article_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <idArg column="label_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="label_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="me.jinwenjie.model.ArticleLabelKey">
     delete from article_label
-    where article_id = #{articleId,jdbcType=BIGINT}
-      and label_id = #{labelId,jdbcType=BIGINT}
+    where article_id = #{articleId,jdbcType=INTEGER}
+      and label_id = #{labelId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="me.jinwenjie.model.ArticleLabelKey">
     insert into article_label (article_id, label_id)
-    values (#{articleId,jdbcType=BIGINT}, #{labelId,jdbcType=BIGINT})
+    values (#{articleId,jdbcType=INTEGER}, #{labelId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="me.jinwenjie.model.ArticleLabelKey">
     insert into article_label
@@ -28,10 +28,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="articleId != null">
-        #{articleId,jdbcType=BIGINT},
+        #{articleId,jdbcType=INTEGER},
       </if>
       <if test="labelId != null">
-        #{labelId,jdbcType=BIGINT},
+        #{labelId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

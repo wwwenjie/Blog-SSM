@@ -10,7 +10,7 @@ public interface OptionDao {
 
     int deleteByExample(OptionExample example);
 
-    int deleteByPrimaryKey(Long optionId);
+    int deleteByPrimaryKey(Integer optionId);
 
     int insert(Option record);
 
@@ -20,7 +20,7 @@ public interface OptionDao {
 
     List<Option> selectByExample(OptionExample example);
 
-    Option selectByPrimaryKey(Long optionId);
+    Option selectByPrimaryKey(Integer optionId);
 
     int updateByExampleSelective(@Param("record") Option record, @Param("example") OptionExample example);
 

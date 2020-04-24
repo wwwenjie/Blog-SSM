@@ -1,7 +1,7 @@
 package me.jinwenjie.model;
 
 public class Option {
-    private Long optionId;
+    private Integer optionId;
 
     private String optionName;
 
@@ -9,13 +9,13 @@ public class Option {
 
     private String optionValue;
 
-    public Option(Long optionId, String optionName, String optionEnable) {
+    public Option(Integer optionId, String optionName, String optionEnable) {
         this.optionId = optionId;
         this.optionName = optionName;
         this.optionEnable = optionEnable;
     }
 
-    public Option(Long optionId, String optionName, String optionEnable, String optionValue) {
+    public Option(Integer optionId, String optionName, String optionEnable, String optionValue) {
         this.optionId = optionId;
         this.optionName = optionName;
         this.optionEnable = optionEnable;
@@ -26,11 +26,11 @@ public class Option {
         super();
     }
 
-    public Long getOptionId() {
+    public Integer getOptionId() {
         return optionId;
     }
 
-    public void setOptionId(Long optionId) {
+    public void setOptionId(Integer optionId) {
         this.optionId = optionId;
     }
 

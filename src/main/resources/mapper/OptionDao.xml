@@ -3,14 +3,14 @@
 <mapper namespace="me.jinwenjie.dao.OptionDao">
   <resultMap id="BaseResultMap" type="me.jinwenjie.model.Option">
     <constructor>
-      <idArg column="option_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="option_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="option_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="option_enable" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="me.jinwenjie.model.Option">
     <constructor>
-      <idArg column="option_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="option_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="option_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="option_enable" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="option_value" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
@@ -88,7 +88,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from option
+    from `option`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -102,7 +102,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from option
+    from `option`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,32 +110,32 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from option
-    where option_id = #{optionId,jdbcType=BIGINT}
+    from `option`
+    where option_id = #{optionId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from option
-    where option_id = #{optionId,jdbcType=BIGINT}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `option`
+    where option_id = #{optionId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="me.jinwenjie.model.OptionExample">
-    delete from option
+    delete from `option`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="me.jinwenjie.model.Option">
-    insert into option (option_id, option_name, option_enable, 
+    insert into `option` (option_id, option_name, option_enable, 
       option_value)
-    values (#{optionId,jdbcType=BIGINT}, #{optionName,jdbcType=VARCHAR}, #{optionEnable,jdbcType=VARCHAR}, 
+    values (#{optionId,jdbcType=INTEGER}, #{optionName,jdbcType=VARCHAR}, #{optionEnable,jdbcType=VARCHAR}, 
       #{optionValue,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="me.jinwenjie.model.Option">
-    insert into option
+    insert into `option`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="optionId != null">
         option_id,
@@ -152,7 +152,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="optionId != null">
-        #{optionId,jdbcType=BIGINT},
+        #{optionId,jdbcType=INTEGER},
       </if>
       <if test="optionName != null">
         #{optionName,jdbcType=VARCHAR},
@@ -166,16 +166,16 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="me.jinwenjie.model.OptionExample" resultType="java.lang.Long">
-    select count(*) from option
+    select count(*) from `option`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update option
+    update `option`
     <set>
       <if test="record.optionId != null">
-        option_id = #{record.optionId,jdbcType=BIGINT},
+        option_id = #{record.optionId,jdbcType=INTEGER},
       </if>
       <if test="record.optionName != null">
         option_name = #{record.optionName,jdbcType=VARCHAR},
@@ -192,8 +192,8 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update option
-    set option_id = #{record.optionId,jdbcType=BIGINT},
+    update `option`
+    set option_id = #{record.optionId,jdbcType=INTEGER},
       option_name = #{record.optionName,jdbcType=VARCHAR},
       option_enable = #{record.optionEnable,jdbcType=VARCHAR},
       option_value = #{record.optionValue,jdbcType=LONGVARCHAR}
@@ -202,8 +202,8 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update option
-    set option_id = #{record.optionId,jdbcType=BIGINT},
+    update `option`
+    set option_id = #{record.optionId,jdbcType=INTEGER},
       option_name = #{record.optionName,jdbcType=VARCHAR},
       option_enable = #{record.optionEnable,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -211,7 +211,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="me.jinwenjie.model.Option">
-    update option
+    update `option`
     <set>
       <if test="optionName != null">
         option_name = #{optionName,jdbcType=VARCHAR},
@@ -223,19 +223,19 @@
         option_value = #{optionValue,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where option_id = #{optionId,jdbcType=BIGINT}
+    where option_id = #{optionId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="me.jinwenjie.model.Option">
-    update option
+    update `option`
     set option_name = #{optionName,jdbcType=VARCHAR},
       option_enable = #{optionEnable,jdbcType=VARCHAR},
       option_value = #{optionValue,jdbcType=LONGVARCHAR}
-    where option_id = #{optionId,jdbcType=BIGINT}
+    where option_id = #{optionId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.Option">
-    update option
+    update `option`
     set option_name = #{optionName,jdbcType=VARCHAR},
       option_enable = #{optionEnable,jdbcType=VARCHAR}
-    where option_id = #{optionId,jdbcType=BIGINT}
+    where option_id = #{optionId,jdbcType=INTEGER}
   </update>
 </mapper>
