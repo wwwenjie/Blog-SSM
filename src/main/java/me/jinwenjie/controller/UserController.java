@@ -24,9 +24,15 @@ public class UserController {
 
     @PostMapping("/tokens")
     public JSONObject login(@RequestBody User user) {
-        Long uid = userService.login(user.getUserEmail(), user.getUserPassword());
+        Long uid = userService.getLoginUid(user.getUserEmail(), user.getUserPassword());
         if (uid != null) {
-            return JSONResult.singleResult("token", JWTUtil.sign(uid));
+            if (userService.getAdminEmail().equals(user.getUserEmail())) {
+                System.out.println("admin");
+                return JSONResult.singleResult("token", JWTUtil.sign(uid, true));
+            } else {
+                System.out.println("user");
+                return JSONResult.singleResult("token", JWTUtil.sign(uid));
+            }
         } else {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_WRONG);
         }
