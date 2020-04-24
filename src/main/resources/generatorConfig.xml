@@ -8,6 +8,9 @@
   <properties resource="jdbc.properties"/>
 
   <context id="default" targetRuntime="MyBatis3">
+    <property name="autoDelimitKeywords" value="true" />
+    <property name="beginningDelimiter" value="`" />
+    <property name="endingDelimiter" value="`" />
     <!--when suppress all comments, add this plugin to overwrite xml-->
     <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
@@ -71,7 +74,7 @@
            enableDeleteByExample="false"
            enableSelectByExample="false"
            selectByExampleQueryId="false"/>
-    <table tableName="option" mapperName="OptionDao"/>
+    <table tableName="option" delimitIdentifiers="true" mapperName="OptionDao"/>
     <table tableName="user" mapperName="UserDao"/>
   </context>
 </generatorConfiguration>
