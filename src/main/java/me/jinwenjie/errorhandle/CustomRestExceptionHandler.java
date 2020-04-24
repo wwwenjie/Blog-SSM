@@ -15,31 +15,31 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     // handle custom error
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<Object> handleCustomerException(CustomException ex) {
-        final ErrorDTO customError = new ErrorDTO(ex.getCode(), ex.getError());
-        return new ResponseEntity<Object>(customError, new HttpHeaders(), ex.getHttpStatus());
+    public ResponseEntity<Object> handleCustomerException(CustomException e) {
+        final ErrorDTO customError = new ErrorDTO(e.getCode(), e.getError());
+        return new ResponseEntity<Object>(customError, new HttpHeaders(), e.getHttpStatus());
     }
 
     // handle unexpected error
     @ExceptionHandler()
     @ResponseBody
     public ErrorDTO handleUnexpectedException(Exception e) {
-        return new ErrorDTO(500, e.getLocalizedMessage(), "Unexpected error: " + e.toString()
-        );
+        return new ErrorDTO(500, e.getLocalizedMessage(), "Unexpected error: " + e);
     }
 
     // handle DAO error
     @ExceptionHandler(DataAccessException.class)
     @ResponseBody
     public ErrorDTO handleDaoException(Exception e) {
-        return new ErrorDTO(500, e.getClass().toString(), e.toString());
+        // the class name will show possible error
+        return new ErrorDTO(500, e.getClass().toString(), e);
     }
 
     // handle http method error
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e,
                                                                          HttpHeaders headers, HttpStatus status, WebRequest request) {
-        final ErrorDTO methodError = new ErrorDTO(status.value(), "HttpRequestMethodNotSupported", e.toString());
+        final ErrorDTO methodError = new ErrorDTO(status.value(), "HttpRequestMethodNotSupported", e);
         return new ResponseEntity<Object>(methodError, new HttpHeaders(), status);
     }
 

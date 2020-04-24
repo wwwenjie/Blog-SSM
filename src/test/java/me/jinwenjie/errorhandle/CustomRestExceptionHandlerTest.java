@@ -8,21 +8,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 public class CustomRestExceptionHandlerTest {
-    final int CODE = 1000;
+    final Integer CODE = 1000;
     final String ERROR = "TEST ERROR";
     final HttpStatus STATUS = HttpStatus.OK;
 
     @Test
     public void handleCustomerException() {
         // from enum
-        CustomException customError = new CustomException(ExceptionEnum.USER_LOGIN_ERROR);
+        CustomException customError = new CustomException(ExceptionEnum.USER_ACCOUNT_WRONG);
         CustomRestExceptionHandler test = new CustomRestExceptionHandler();
         ResponseEntity<Object> result = test.handleCustomerException(customError);
         ErrorDTO errorDTO = (ErrorDTO) result.getBody();
         assert errorDTO != null;
-        assertEquals(errorDTO.getCode(), ExceptionEnum.USER_LOGIN_ERROR.getCode());
-        assertEquals(errorDTO.getError(), ExceptionEnum.USER_LOGIN_ERROR.getError());
-        assertEquals(result.getStatusCode(), ExceptionEnum.USER_LOGIN_ERROR.getHttpStatus());
+        assertEquals(errorDTO.getCode(), ExceptionEnum.USER_ACCOUNT_WRONG.getCode());
+        assertEquals(errorDTO.getError(), ExceptionEnum.USER_ACCOUNT_WRONG.getError());
+        assertEquals(result.getStatusCode(), ExceptionEnum.USER_ACCOUNT_WRONG.getHttpStatus());
         assertNull(errorDTO.getDetail());
         // from custom
         customError.setCode(CODE);
@@ -42,8 +42,8 @@ public class CustomRestExceptionHandlerTest {
         Exception exception = new Exception(ERROR);
         CustomRestExceptionHandler test = new CustomRestExceptionHandler();
         ErrorDTO errorDTO = test.handleUnexpectedException(exception);
-        assertEquals(errorDTO.getCode(), 500);
+        assertEquals(errorDTO.getCode(), (Integer) 500);
         assertEquals(errorDTO.getError(), ERROR);
-        assertEquals(errorDTO.getDetail(), "Unexpected error: " + exception.toString());
+        assertEquals(errorDTO.getDetail(), "Unexpected error: " + exception);
     }
 }

@@ -3,9 +3,9 @@ package me.jinwenjie.errorhandle;
 import org.springframework.http.HttpStatus;
 
 public enum ExceptionEnum {
-    USER_LOGIN_ERROR(10001, "account or password wrong", HttpStatus.BAD_REQUEST);
+    USER_ACCOUNT_WRONG(10001, "account or password wrong", HttpStatus.UNAUTHORIZED);
 
-    private int code;
+    private Integer code;
     private String error;
     private HttpStatus httpStatus;
 
@@ -15,11 +15,11 @@ public enum ExceptionEnum {
         this.httpStatus = status;
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
