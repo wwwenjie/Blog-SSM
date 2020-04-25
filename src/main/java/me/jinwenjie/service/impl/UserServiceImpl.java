@@ -2,6 +2,8 @@ package me.jinwenjie.service.impl;
 
 import me.jinwenjie.dao.OptionDao;
 import me.jinwenjie.dao.UserDao;
+import me.jinwenjie.errorhandle.CustomException;
+import me.jinwenjie.errorhandle.ExceptionEnum;
 import me.jinwenjie.model.OptionExample;
 import me.jinwenjie.model.User;
 import me.jinwenjie.model.UserExample;
@@ -50,6 +52,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean create(User user) {
+        if (user.getUserEmail() == null && user.getUserTelephoneNumber() == null) {
+            throw new CustomException(ExceptionEnum.USER_ACCOUNT_EMPTY);
+        }
         return userDao.insert(user) == 1;
     }
 

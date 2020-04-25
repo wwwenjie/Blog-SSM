@@ -3,7 +3,8 @@ package me.jinwenjie.errorhandle;
 import org.springframework.http.HttpStatus;
 
 public enum ExceptionEnum {
-    USER_ACCOUNT_WRONG(10001, "account or password wrong", HttpStatus.UNAUTHORIZED);
+    USER_ACCOUNT_WRONG(10001, "account or password wrong", HttpStatus.UNAUTHORIZED),
+    USER_ACCOUNT_EMPTY(10002, "email and phone number both are empty", HttpStatus.NOT_ACCEPTABLE);
 
     private Integer code;
     private String error;
