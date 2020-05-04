@@ -22,6 +22,7 @@
     </mvc:interceptor>
     <mvc:interceptor>
       <mvc:mapping path="/**"/>
+      <mvc:exclude-mapping path="/users/**" />
       <bean class="me.jinwenjie.interceptor.SecurityInterceptor"/>
     </mvc:interceptor>
   </mvc:interceptors>

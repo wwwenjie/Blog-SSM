@@ -1,5 +1,7 @@
 package me.jinwenjie.interceptor;
 
+import me.jinwenjie.errorhandle.CustomException;
+import me.jinwenjie.errorhandle.ExceptionEnum;
 import me.jinwenjie.util.JWTUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -14,7 +16,11 @@ public class SecurityInterceptor implements HandlerInterceptor {
         if (method.equals("GET")) {
             return true;
         } else {
-            return token != null && JWTUtil.checkAdmin(token.split(" ")[1]);
+            if (token != null && JWTUtil.checkAdmin(token.split(" ")[1])) {
+                return true;
+            } else {
+                throw new CustomException(ExceptionEnum.AUTH_NOT_ADMIN);
+            }
         }
     }
 }
