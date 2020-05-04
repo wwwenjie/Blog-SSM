@@ -20,11 +20,11 @@
       <mvc:mapping path="/users/**"/>
       <bean class="me.jinwenjie.interceptor.SecurityUserInterceptor"/>
     </mvc:interceptor>
-    <mvc:interceptor>
-      <mvc:mapping path="/**"/>
-      <mvc:exclude-mapping path="/users/**" />
-      <bean class="me.jinwenjie.interceptor.SecurityInterceptor"/>
-    </mvc:interceptor>
+    <!--<mvc:interceptor>-->
+    <!--  <mvc:mapping path="/**"/>-->
+    <!--  <mvc:exclude-mapping path="/users/**" />-->
+    <!--  <bean class="me.jinwenjie.interceptor.SecurityInterceptor"/>-->
+    <!--</mvc:interceptor>-->
   </mvc:interceptors>
 
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -32,5 +32,7 @@
     <property name="suffix" value=".html"/>
     <property name="contentType" value="text/html"/>
   </bean>
+
+  <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 
 </beans>
