@@ -23,10 +23,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer getLoginUid(String email, String password) {
+    public Integer getLoginUid(String email, Integer telephone, String password) {
         // todo: encrypt
+        // UserExample 是 MBG 的查询类，用于实现复杂查询，若未使用 MBG，自行通过 dao 实现
         UserExample example = new UserExample();
-        example.or().andUserEmailEqualTo(email).andUserPasswordEqualTo(password);
+        // 查询邮箱、手机、密码都匹配的用户 ID
+        example.or().andUserEmailEqualTo(email).andUserTelephoneNumberEqualTo(telephone).andUserPasswordEqualTo(password);
         List<User> resultList = userDao.selectByExample(example);
         return resultList.isEmpty() ? null : resultList.get(0).getUserId();
     }
@@ -52,10 +54,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean create(User user) {
-        if (user.getUserEmail() == null && user.getUserTelephoneNumber() == null) {
+        // 空账号错误
+        if (user.getUserEmail() == null && user.getUserTelephoneNumber() == null || user.getUserPassword() == null) {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_EMPTY);
         }
-        return userDao.insert(user) == 1;
+        return userDao.insert(user) ==  1;
     }
 
     @Override
