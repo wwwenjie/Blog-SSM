@@ -8,8 +8,11 @@ import me.jinwenjie.util.JSONResult;
 import me.jinwenjie.util.JWTUtil;
 import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -30,12 +33,15 @@ public class UserController {
         Integer uid = userService.getLoginUid(user.getUserEmail(), user.getUserTelephoneNumber(), user.getUserPassword());
         if (uid != null) {
             // 根据 option 表里的管理员邮箱判断是否是管理员
+            JSONObject res = new JSONObject();
             if (userService.getAdminEmail().equals(user.getUserEmail())) {
                 // 下发 JWT Token
-                return JSONResult.singleResult("token", JWTUtil.sign(uid, true));
+                res.put("token", JWTUtil.sign(uid, true));
             } else {
-                return JSONResult.singleResult("token", JWTUtil.sign(uid));
+                res.put("token", JWTUtil.sign(uid));
             }
+            res.put("uid", uid);
+            return res;
         } else {
             // 抛出账号密码错误
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_WRONG);
@@ -76,5 +82,14 @@ public class UserController {
     public JSONObject deleteUserById(@PathVariable("id") Integer id) {
         userService.delete(id);
         return JSONResult.success();
+    }
+
+    @PostMapping("/images")
+    public JSONObject fileUpload(@RequestParam("img") MultipartFile file, HttpServletRequest request) throws IOException {
+        // windows 系统路径 \\
+        String filePath = request.getSession().getServletContext().getRealPath("\\") + "\\img\\" + file.getOriginalFilename();
+        System.out.println(filePath);
+        file.transferTo(new File(filePath));
+        return JSONResult.singleResult("url", "/img/" + file.getOriginalFilename());
     }
 }

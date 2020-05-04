@@ -25,12 +25,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer getLoginUid(String email, Integer telephone, String password) {
         // todo: encrypt
-        // UserExample 是 MBG 的查询类，用于实现复杂查询，若未使用 MBG，自行通过 dao 实现
-        UserExample example = new UserExample();
-        // 查询邮箱、手机、密码都匹配的用户 ID
-        example.or().andUserEmailEqualTo(email).andUserTelephoneNumberEqualTo(telephone).andUserPasswordEqualTo(password);
-        List<User> resultList = userDao.selectByExample(example);
-        return resultList.isEmpty() ? null : resultList.get(0).getUserId();
+        if (email == null && telephone == null || password == null) {
+            throw new CustomException(ExceptionEnum.USER_ACCOUNT_EMPTY);
+        } else {
+            // UserExample 是 MBG 的查询类，用于实现复杂查询，若未使用 MBG，自行通过 dao 实现
+            // 查询邮箱、手机、密码都匹配的用户 ID
+            UserExample example = new UserExample();
+            if (email == null) {
+                example.or().andUserTelephoneNumberEqualTo(telephone).andUserPasswordEqualTo(password);
+            } else {
+                example.or().andUserEmailEqualTo(email).andUserPasswordEqualTo(password);
+            }
+            List<User> resultList = userDao.selectByExample(example);
+            return resultList.isEmpty() ? null : resultList.get(0).getUserId();
+        }
     }
 
     @Override
@@ -58,7 +66,7 @@ public class UserServiceImpl implements UserService {
         if (user.getUserEmail() == null && user.getUserTelephoneNumber() == null || user.getUserPassword() == null) {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_EMPTY);
         }
-        return userDao.insert(user) ==  1;
+        return userDao.insert(user) == 1;
     }
 
     @Override
