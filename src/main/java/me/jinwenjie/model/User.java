@@ -13,21 +13,43 @@ public class User {
 
     private String userProfilePhoto;
 
+    private String userGender;
+
+    private Date userBday;
+
     private Date userRegistrationDate;
 
     private String userIp;
 
     private Integer userTelephoneNumber;
 
-    public User(Integer userId, String userName, String userPassword, String userEmail, String userProfilePhoto, Date userRegistrationDate, String userIp, Integer userTelephoneNumber) {
+    private String userHobby;
+
+    public User(Integer userId, String userName, String userPassword, String userEmail, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp, Integer userTelephoneNumber) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.userProfilePhoto = userProfilePhoto;
+        this.userGender = userGender;
+        this.userBday = userBday;
         this.userRegistrationDate = userRegistrationDate;
         this.userIp = userIp;
         this.userTelephoneNumber = userTelephoneNumber;
+    }
+
+    public User(Integer userId, String userName, String userPassword, String userEmail, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp, Integer userTelephoneNumber, String userHobby) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userProfilePhoto = userProfilePhoto;
+        this.userGender = userGender;
+        this.userBday = userBday;
+        this.userRegistrationDate = userRegistrationDate;
+        this.userIp = userIp;
+        this.userTelephoneNumber = userTelephoneNumber;
+        this.userHobby = userHobby;
     }
 
     public User() {
@@ -74,6 +96,22 @@ public class User {
         this.userProfilePhoto = userProfilePhoto == null ? null : userProfilePhoto.trim();
     }
 
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender == null ? null : userGender.trim();
+    }
+
+    public Date getUserBday() {
+        return userBday;
+    }
+
+    public void setUserBday(Date userBday) {
+        this.userBday = userBday;
+    }
+
     public Date getUserRegistrationDate() {
         return userRegistrationDate;
     }
@@ -96,5 +134,13 @@ public class User {
 
     public void setUserTelephoneNumber(Integer userTelephoneNumber) {
         this.userTelephoneNumber = userTelephoneNumber;
+    }
+
+    public String getUserHobby() {
+        return userHobby;
+    }
+
+    public void setUserHobby(String userHobby) {
+        this.userHobby = userHobby == null ? null : userHobby.trim();
     }
 }

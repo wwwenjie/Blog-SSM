@@ -155,6 +155,11 @@ CREATE TABLE `user` (
   `user_password` varchar(255) NOT NULL COMMENT '用户密码',
   `user_email` varchar(30) DEFAULT NULL COMMENT '用户邮箱',
   `user_profile_photo` varchar(255) DEFAULT NULL COMMENT '用户头像',
+--   奇怪的字段开始
+  `user_gender` varchar(20) DEFAULT NULL COMMENT '用户性别',
+  `user_hobby` longtext DEFAULT NULL COMMENT '用户爱好',
+  `user_bday` datetime DEFAULT NULL COMMENT '用户生日',
+--   奇怪的字段结束
   `user_registration_date` datetime NOT NULL COMMENT '注册时间',
   `user_ip` varchar(20) NOT NULL COMMENT '用户注册IP',
   `user_telephone_number` int(15) DEFAULT NULL COMMENT '用户手机号'

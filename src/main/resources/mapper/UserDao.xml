@@ -8,9 +8,26 @@
       <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_profile_photo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_gender" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_bday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="user_registration_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_telephone_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="me.jinwenjie.model.User">
+    <constructor>
+      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_profile_photo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_gender" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_bday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="user_registration_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_telephone_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_hobby" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -72,9 +89,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, user_name, user_password, user_email, user_profile_photo, user_registration_date, 
-    user_ip, user_telephone_number
+    user_id, user_name, user_password, user_email, user_profile_photo, user_gender, user_bday, 
+    user_registration_date, user_ip, user_telephone_number
   </sql>
+  <sql id="Blob_Column_List">
+    user_hobby
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="me.jinwenjie.model.UserExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="me.jinwenjie.model.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -89,9 +125,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
@@ -107,11 +145,13 @@
   </delete>
   <insert id="insert" parameterType="me.jinwenjie.model.User">
     insert into user (user_id, user_name, user_password, 
-      user_email, user_profile_photo, user_registration_date, 
-      user_ip, user_telephone_number)
+      user_email, user_profile_photo, user_gender, 
+      user_bday, user_registration_date, user_ip, 
+      user_telephone_number, user_hobby)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{userEmail,jdbcType=VARCHAR}, #{userProfilePhoto,jdbcType=VARCHAR}, #{userRegistrationDate,jdbcType=TIMESTAMP}, 
-      #{userIp,jdbcType=VARCHAR}, #{userTelephoneNumber,jdbcType=INTEGER})
+      #{userEmail,jdbcType=VARCHAR}, #{userProfilePhoto,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR}, 
+      #{userBday,jdbcType=TIMESTAMP}, #{userRegistrationDate,jdbcType=TIMESTAMP}, #{userIp,jdbcType=VARCHAR}, 
+      #{userTelephoneNumber,jdbcType=INTEGER}, #{userHobby,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="me.jinwenjie.model.User">
     insert into user
@@ -131,6 +171,12 @@
       <if test="userProfilePhoto != null">
         user_profile_photo,
       </if>
+      <if test="userGender != null">
+        user_gender,
+      </if>
+      <if test="userBday != null">
+        user_bday,
+      </if>
       <if test="userRegistrationDate != null">
         user_registration_date,
       </if>
@@ -139,6 +185,9 @@
       </if>
       <if test="userTelephoneNumber != null">
         user_telephone_number,
+      </if>
+      <if test="userHobby != null">
+        user_hobby,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -157,6 +206,12 @@
       <if test="userProfilePhoto != null">
         #{userProfilePhoto,jdbcType=VARCHAR},
       </if>
+      <if test="userGender != null">
+        #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userBday != null">
+        #{userBday,jdbcType=TIMESTAMP},
+      </if>
       <if test="userRegistrationDate != null">
         #{userRegistrationDate,jdbcType=TIMESTAMP},
       </if>
@@ -165,6 +220,9 @@
       </if>
       <if test="userTelephoneNumber != null">
         #{userTelephoneNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userHobby != null">
+        #{userHobby,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -192,6 +250,12 @@
       <if test="record.userProfilePhoto != null">
         user_profile_photo = #{record.userProfilePhoto,jdbcType=VARCHAR},
       </if>
+      <if test="record.userGender != null">
+        user_gender = #{record.userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userBday != null">
+        user_bday = #{record.userBday,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.userRegistrationDate != null">
         user_registration_date = #{record.userRegistrationDate,jdbcType=TIMESTAMP},
       </if>
@@ -201,7 +265,27 @@
       <if test="record.userTelephoneNumber != null">
         user_telephone_number = #{record.userTelephoneNumber,jdbcType=INTEGER},
       </if>
+      <if test="record.userHobby != null">
+        user_hobby = #{record.userHobby,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_profile_photo = #{record.userProfilePhoto,jdbcType=VARCHAR},
+      user_gender = #{record.userGender,jdbcType=VARCHAR},
+      user_bday = #{record.userBday,jdbcType=TIMESTAMP},
+      user_registration_date = #{record.userRegistrationDate,jdbcType=TIMESTAMP},
+      user_ip = #{record.userIp,jdbcType=VARCHAR},
+      user_telephone_number = #{record.userTelephoneNumber,jdbcType=INTEGER},
+      user_hobby = #{record.userHobby,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +297,8 @@
       user_password = #{record.userPassword,jdbcType=VARCHAR},
       user_email = #{record.userEmail,jdbcType=VARCHAR},
       user_profile_photo = #{record.userProfilePhoto,jdbcType=VARCHAR},
+      user_gender = #{record.userGender,jdbcType=VARCHAR},
+      user_bday = #{record.userBday,jdbcType=TIMESTAMP},
       user_registration_date = #{record.userRegistrationDate,jdbcType=TIMESTAMP},
       user_ip = #{record.userIp,jdbcType=VARCHAR},
       user_telephone_number = #{record.userTelephoneNumber,jdbcType=INTEGER}
@@ -235,6 +321,12 @@
       <if test="userProfilePhoto != null">
         user_profile_photo = #{userProfilePhoto,jdbcType=VARCHAR},
       </if>
+      <if test="userGender != null">
+        user_gender = #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userBday != null">
+        user_bday = #{userBday,jdbcType=TIMESTAMP},
+      </if>
       <if test="userRegistrationDate != null">
         user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
       </if>
@@ -244,7 +336,24 @@
       <if test="userTelephoneNumber != null">
         user_telephone_number = #{userTelephoneNumber,jdbcType=INTEGER},
       </if>
+      <if test="userHobby != null">
+        user_hobby = #{userHobby,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="me.jinwenjie.model.User">
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_profile_photo = #{userProfilePhoto,jdbcType=VARCHAR},
+      user_gender = #{userGender,jdbcType=VARCHAR},
+      user_bday = #{userBday,jdbcType=TIMESTAMP},
+      user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
+      user_ip = #{userIp,jdbcType=VARCHAR},
+      user_telephone_number = #{userTelephoneNumber,jdbcType=INTEGER},
+      user_hobby = #{userHobby,jdbcType=LONGVARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.User">
@@ -253,6 +362,8 @@
       user_password = #{userPassword,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
       user_profile_photo = #{userProfilePhoto,jdbcType=VARCHAR},
+      user_gender = #{userGender,jdbcType=VARCHAR},
+      user_bday = #{userBday,jdbcType=TIMESTAMP},
       user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
       user_ip = #{userIp,jdbcType=VARCHAR},
       user_telephone_number = #{userTelephoneNumber,jdbcType=INTEGER}

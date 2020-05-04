@@ -445,6 +445,136 @@ public class UserExample {
             return (Criteria) this;
         }
 
+        public Criteria andUserGenderIsNull() {
+            addCriterion("user_gender is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderIsNotNull() {
+            addCriterion("user_gender is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderEqualTo(String value) {
+            addCriterion("user_gender =", value, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderNotEqualTo(String value) {
+            addCriterion("user_gender <>", value, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderGreaterThan(String value) {
+            addCriterion("user_gender >", value, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderGreaterThanOrEqualTo(String value) {
+            addCriterion("user_gender >=", value, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderLessThan(String value) {
+            addCriterion("user_gender <", value, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderLessThanOrEqualTo(String value) {
+            addCriterion("user_gender <=", value, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderLike(String value) {
+            addCriterion("user_gender like", value, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderNotLike(String value) {
+            addCriterion("user_gender not like", value, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderIn(List<String> values) {
+            addCriterion("user_gender in", values, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderNotIn(List<String> values) {
+            addCriterion("user_gender not in", values, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderBetween(String value1, String value2) {
+            addCriterion("user_gender between", value1, value2, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserGenderNotBetween(String value1, String value2) {
+            addCriterion("user_gender not between", value1, value2, "userGender");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayIsNull() {
+            addCriterion("user_bday is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayIsNotNull() {
+            addCriterion("user_bday is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayEqualTo(Date value) {
+            addCriterion("user_bday =", value, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayNotEqualTo(Date value) {
+            addCriterion("user_bday <>", value, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayGreaterThan(Date value) {
+            addCriterion("user_bday >", value, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayGreaterThanOrEqualTo(Date value) {
+            addCriterion("user_bday >=", value, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayLessThan(Date value) {
+            addCriterion("user_bday <", value, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayLessThanOrEqualTo(Date value) {
+            addCriterion("user_bday <=", value, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayIn(List<Date> values) {
+            addCriterion("user_bday in", values, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayNotIn(List<Date> values) {
+            addCriterion("user_bday not in", values, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayBetween(Date value1, Date value2) {
+            addCriterion("user_bday between", value1, value2, "userBday");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserBdayNotBetween(Date value1, Date value2) {
+            addCriterion("user_bday not between", value1, value2, "userBday");
+            return (Criteria) this;
+        }
+
         public Criteria andUserRegistrationDateIsNull() {
             addCriterion("user_registration_date is null");
             return (Criteria) this;
