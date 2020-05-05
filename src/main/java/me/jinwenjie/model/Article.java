@@ -9,6 +9,8 @@ public class Article {
 
     private String articleTitle;
 
+    private String articleImage;
+
     private Integer articleViews;
 
     private Integer articleCommentCount;
@@ -19,20 +21,22 @@ public class Article {
 
     private String articleContent;
 
-    public Article(Integer articleId, Integer userId, String articleTitle, Integer articleViews, Integer articleCommentCount, Date articleDate, Date articleLastModifyDate) {
+    public Article(Integer articleId, Integer userId, String articleTitle, String articleImage, Integer articleViews, Integer articleCommentCount, Date articleDate, Date articleLastModifyDate) {
         this.articleId = articleId;
         this.userId = userId;
         this.articleTitle = articleTitle;
+        this.articleImage = articleImage;
         this.articleViews = articleViews;
         this.articleCommentCount = articleCommentCount;
         this.articleDate = articleDate;
         this.articleLastModifyDate = articleLastModifyDate;
     }
 
-    public Article(Integer articleId, Integer userId, String articleTitle, Integer articleViews, Integer articleCommentCount, Date articleDate, Date articleLastModifyDate, String articleContent) {
+    public Article(Integer articleId, Integer userId, String articleTitle, String articleImage, Integer articleViews, Integer articleCommentCount, Date articleDate, Date articleLastModifyDate, String articleContent) {
         this.articleId = articleId;
         this.userId = userId;
         this.articleTitle = articleTitle;
+        this.articleImage = articleImage;
         this.articleViews = articleViews;
         this.articleCommentCount = articleCommentCount;
         this.articleDate = articleDate;
@@ -66,6 +70,14 @@ public class Article {
 
     public void setArticleTitle(String articleTitle) {
         this.articleTitle = articleTitle == null ? null : articleTitle.trim();
+    }
+
+    public String getArticleImage() {
+        return articleImage;
+    }
+
+    public void setArticleImage(String articleImage) {
+        this.articleImage = articleImage == null ? null : articleImage.trim();
     }
 
     public Integer getArticleViews() {

@@ -7,9 +7,9 @@ public class User {
 
     private String userName;
 
-    private String userPassword;
-
     private String userEmail;
+
+    private String userPassword;
 
     private String userProfilePhoto;
 
@@ -21,34 +21,30 @@ public class User {
 
     private String userIp;
 
-    private Integer userTelephoneNumber;
-
     private String userHobby;
 
-    public User(Integer userId, String userName, String userPassword, String userEmail, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp, Integer userTelephoneNumber) {
+    public User(Integer userId, String userName, String userEmail, String userPassword, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp) {
         this.userId = userId;
         this.userName = userName;
-        this.userPassword = userPassword;
         this.userEmail = userEmail;
+        this.userPassword = userPassword;
         this.userProfilePhoto = userProfilePhoto;
         this.userGender = userGender;
         this.userBday = userBday;
         this.userRegistrationDate = userRegistrationDate;
         this.userIp = userIp;
-        this.userTelephoneNumber = userTelephoneNumber;
     }
 
-    public User(Integer userId, String userName, String userPassword, String userEmail, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp, Integer userTelephoneNumber, String userHobby) {
+    public User(Integer userId, String userName, String userEmail, String userPassword, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp, String userHobby) {
         this.userId = userId;
         this.userName = userName;
-        this.userPassword = userPassword;
         this.userEmail = userEmail;
+        this.userPassword = userPassword;
         this.userProfilePhoto = userProfilePhoto;
         this.userGender = userGender;
         this.userBday = userBday;
         this.userRegistrationDate = userRegistrationDate;
         this.userIp = userIp;
-        this.userTelephoneNumber = userTelephoneNumber;
         this.userHobby = userHobby;
     }
 
@@ -72,20 +68,20 @@ public class User {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword == null ? null : userPassword.trim();
-    }
-
     public String getUserEmail() {
         return userEmail;
     }
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail == null ? null : userEmail.trim();
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword == null ? null : userPassword.trim();
     }
 
     public String getUserProfilePhoto() {
@@ -126,14 +122,6 @@ public class User {
 
     public void setUserIp(String userIp) {
         this.userIp = userIp == null ? null : userIp.trim();
-    }
-
-    public Integer getUserTelephoneNumber() {
-        return userTelephoneNumber;
-    }
-
-    public void setUserTelephoneNumber(Integer userTelephoneNumber) {
-        this.userTelephoneNumber = userTelephoneNumber;
     }
 
     public String getUserHobby() {

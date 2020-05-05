@@ -295,6 +295,76 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
+        public Criteria andArticleImageIsNull() {
+            addCriterion("article_image is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageIsNotNull() {
+            addCriterion("article_image is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageEqualTo(String value) {
+            addCriterion("article_image =", value, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageNotEqualTo(String value) {
+            addCriterion("article_image <>", value, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageGreaterThan(String value) {
+            addCriterion("article_image >", value, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageGreaterThanOrEqualTo(String value) {
+            addCriterion("article_image >=", value, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageLessThan(String value) {
+            addCriterion("article_image <", value, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageLessThanOrEqualTo(String value) {
+            addCriterion("article_image <=", value, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageLike(String value) {
+            addCriterion("article_image like", value, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageNotLike(String value) {
+            addCriterion("article_image not like", value, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageIn(List<String> values) {
+            addCriterion("article_image in", values, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageNotIn(List<String> values) {
+            addCriterion("article_image not in", values, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageBetween(String value1, String value2) {
+            addCriterion("article_image between", value1, value2, "articleImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleImageNotBetween(String value1, String value2) {
+            addCriterion("article_image not between", value1, value2, "articleImage");
+            return (Criteria) this;
+        }
+
         public Criteria andArticleViewsIsNull() {
             addCriterion("article_views is null");
             return (Criteria) this;

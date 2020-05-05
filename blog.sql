@@ -34,6 +34,7 @@ CREATE TABLE `article` (
   `user_id` int(10) UNSIGNED NOT NULL COMMENT '发表用户ID',
   `article_title` tinytext NOT NULL COMMENT '博文标题',
   `article_content` longtext COMMENT '博文内容',
+  `article_image` varchar(255) DEFAULT NULL COMMENT '博文图片',
   `article_views` int(10) UNSIGNED NOT NULL COMMENT '浏览量',
   `article_comment_count` int(10) UNSIGNED NOT NULL COMMENT '评论总数',
   `article_date` datetime NOT NULL COMMENT '发表时间',
@@ -151,9 +152,9 @@ INSERT INTO `option` (`option_id`, `option_name`, `option_value`, `option_enable
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(10) UNSIGNED NOT NULL COMMENT '用户ID',
-  `user_name` varchar(20) NOT NULL COMMENT '用户名',
+  `user_name` varchar(20) DEFAULT 'Anonymity' COMMENT '用户名',
+  `user_email` varchar(30) NOT NULL COMMENT '用户邮箱',
   `user_password` varchar(255) NOT NULL COMMENT '用户密码',
-  `user_email` varchar(30) DEFAULT NULL COMMENT '用户邮箱',
   `user_profile_photo` varchar(255) DEFAULT NULL COMMENT '用户头像',
 --   奇怪的字段开始
   `user_gender` varchar(20) DEFAULT NULL COMMENT '用户性别',
@@ -161,8 +162,7 @@ CREATE TABLE `user` (
   `user_bday` datetime DEFAULT NULL COMMENT '用户生日',
 --   奇怪的字段结束
   `user_registration_date` datetime NOT NULL COMMENT '注册时间',
-  `user_ip` varchar(20) NOT NULL COMMENT '用户注册IP',
-  `user_telephone_number` int(15) DEFAULT NULL COMMENT '用户手机号'
+  `user_ip` varchar(20) NOT NULL COMMENT '用户注册IP'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -227,8 +227,7 @@ ALTER TABLE `option`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
   ADD KEY `user_name` (`user_name`),
-  ADD KEY `user_email` (`user_email`),
-  ADD KEY `user_telephone_number` (`user_telephone_number`);
+  ADD UNIQUE KEY `user_email` (`user_email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
