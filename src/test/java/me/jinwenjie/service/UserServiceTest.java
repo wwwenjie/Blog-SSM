@@ -49,16 +49,9 @@ public class UserServiceTest extends BaseTest {
     @Test
     public void accountNullUser() {
         User user = new User();
-        user.setUserName(USERNAME);
-        user.setUserPassword(PASSWORD);
         user.setUserRegistrationDate(new Date());
         user.setUserIp(IP);
         thrown.expect(CustomException.class);
         System.out.println(userService.create(user));
-    }
-
-    @Test
-    public void getAdminEmail() {
-        assertEquals("admin", userService.getAdminEmail());
     }
 }

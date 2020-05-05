@@ -8,6 +8,8 @@ import me.jinwenjie.model.OptionExample;
 import me.jinwenjie.model.User;
 import me.jinwenjie.model.UserExample;
 import me.jinwenjie.service.UserService;
+import me.jinwenjie.util.JWTUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,26 +24,33 @@ public class UserServiceImpl implements UserService {
         this.optionDao = optionDao;
     }
 
-    @Override
-    public Integer getLoginUid(String email, Integer telephone, String password) {
+    /**
+     * @param user email password
+     * @return token
+     */
+    public String login(User user) {
         // todo: encrypt
-        if (email == null && telephone == null || password == null) {
+        if (StringUtils.isEmpty(user.getUserEmail()) || StringUtils.isEmpty(user.getUserPassword())) {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_EMPTY);
+        }
+        // UserExample 是 MBG 的查询类，用于实现复杂查询，若未使用 MBG，自行通过 dao 实现
+        // 返回邮箱、密码匹配的用户 ID
+        String email = user.getUserEmail();
+        String password = user.getUserPassword();
+        UserExample example = new UserExample();
+        example.or().andUserEmailEqualTo(email).andUserPasswordEqualTo(password);
+        List<User> resultList = userDao.selectByExample(example);
+        if (resultList.isEmpty()) {
+            throw new CustomException(ExceptionEnum.USER_ACCOUNT_WRONG);
+        }
+        Integer uid = resultList.get(0).getUserId();
+        if (getAdminEmail().equals(email)) {
+            return JWTUtil.sign(uid, true);
         } else {
-            // UserExample 是 MBG 的查询类，用于实现复杂查询，若未使用 MBG，自行通过 dao 实现
-            // 查询邮箱、手机、密码都匹配的用户 ID
-            UserExample example = new UserExample();
-            if (email == null) {
-                example.or().andUserTelephoneNumberEqualTo(telephone).andUserPasswordEqualTo(password);
-            } else {
-                example.or().andUserEmailEqualTo(email).andUserPasswordEqualTo(password);
-            }
-            List<User> resultList = userDao.selectByExample(example);
-            return resultList.isEmpty() ? null : resultList.get(0).getUserId();
+            return JWTUtil.sign(uid);
         }
     }
 
-    @Override
     public String getAdminEmail() {
         OptionExample example = new OptionExample();
         example.or().andOptionNameEqualTo("admin_email");
@@ -62,8 +71,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean create(User user) {
-        // 空账号错误
-        if (user.getUserEmail() == null && user.getUserTelephoneNumber() == null || user.getUserPassword() == null) {
+        if (StringUtils.isEmpty(user.getUserEmail()) || StringUtils.isEmpty(user.getUserPassword())) {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_EMPTY);
         }
         return userDao.insert(user) == 1;
