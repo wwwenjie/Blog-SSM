@@ -74,6 +74,12 @@
            enableDeleteByExample="false"
            enableSelectByExample="false"
            selectByExampleQueryId="false"/>
+    <table tableName="address" mapperName="AddressDao"
+           enableCountByExample="false"
+           enableUpdateByExample="false"
+           enableDeleteByExample="false"
+           enableSelectByExample="false"
+           selectByExampleQueryId="false"/>
     <table tableName="option" delimitIdentifiers="true" mapperName="OptionDao"/>
     <table tableName="user" mapperName="UserDao"/>
   </context>

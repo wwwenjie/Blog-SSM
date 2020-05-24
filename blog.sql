@@ -25,6 +25,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `address`
+--
+
+DROP TABLE IF EXISTS `address`;
+CREATE TABLE `address` (
+  `address_id` int(10) UNSIGNED NOT NULL COMMENT '地址ID',
+  `address` varchar(255) DEFAULT NULL COMMENT '具体地址',
+  `address_type` varchar(255) DEFAULT NULL COMMENT '地址类型',
+  `user_id` int(10) UNSIGNED NOT NULL COMMENT '发表用户ID'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `article`
 --
 
@@ -168,6 +184,13 @@ CREATE TABLE `user` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`address_id`);
+
 
 --
 -- Indexes for table `article`

@@ -1,5 +1,6 @@
 package me.jinwenjie.controller;
 
+import me.jinwenjie.model.Address;
 import me.jinwenjie.model.User;
 import me.jinwenjie.service.UserService;
 import me.jinwenjie.util.JSONResult;
@@ -55,6 +56,13 @@ public class UserController {
         user.setUserRegistrationDate(new Date());
         user.setUserIp(request.getRemoteAddr());
         userService.create(user);
+        JSONObject res = this.login(user);
+        return JSONResult.singleResult("uid", res.get("uid"));
+    }
+
+    @PostMapping("/address")
+    public JSONObject addAddress(@RequestBody Address address) {
+        userService.addAddress(address);
         return JSONResult.success();
     }
 

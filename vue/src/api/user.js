@@ -16,6 +16,14 @@ export function login (user) {
   })
 }
 
+export function addAddress (address) {
+  return request({
+    url: '/address',
+    method: 'POST',
+    data: address
+  })
+}
+
 export function uploadImg (data) {
   console.log(data)
   return request({

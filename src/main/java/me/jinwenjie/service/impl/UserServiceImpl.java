@@ -1,9 +1,11 @@
 package me.jinwenjie.service.impl;
 
+import me.jinwenjie.dao.AddressDao;
 import me.jinwenjie.dao.OptionDao;
 import me.jinwenjie.dao.UserDao;
 import me.jinwenjie.errorhandle.CustomException;
 import me.jinwenjie.errorhandle.ExceptionEnum;
+import me.jinwenjie.model.Address;
 import me.jinwenjie.model.OptionExample;
 import me.jinwenjie.model.User;
 import me.jinwenjie.model.UserExample;
@@ -18,10 +20,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final OptionDao optionDao;
+    private final AddressDao addressDao;
 
-    public UserServiceImpl(UserDao userDao, OptionDao optionDao) {
+    public UserServiceImpl(UserDao userDao, OptionDao optionDao, AddressDao addressDao) {
         this.userDao = userDao;
         this.optionDao = optionDao;
+        this.addressDao = addressDao;
     }
 
     /**
@@ -85,5 +89,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean delete(Integer id) {
         return userDao.deleteByPrimaryKey(id) == 1;
+    }
+
+    @Override
+    public boolean addAddress(Address address) {
+        return addressDao.insert(address) == 1;
     }
 }

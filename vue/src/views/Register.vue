@@ -17,6 +17,42 @@
       </p>
       <p class="register-input">
         <label>
+          <div>address1</div>
+          <input
+            v-model="address[0].address"
+            type="text"
+          />
+        </label>
+      </p>
+      <p class="register-input">
+        <label>
+          <div>address1 type</div>
+          <input
+            v-model="address[0].addressType"
+            type="text"
+          />
+        </label>
+      </p>
+      <p class="register-input">
+        <label>
+          <div>address2</div>
+          <input
+            v-model="address[1].address"
+            type="text"
+          />
+        </label>
+      </p>
+      <p class="register-input">
+        <label>
+          <div>address2 type</div>
+          <input
+            v-model="address[1].addressType"
+            type="text"
+          />
+        </label>
+      </p>
+      <p class="register-input">
+        <label>
           <div>userProfilePhoto</div>
           <input
             ref="img"
@@ -25,15 +61,16 @@
           >
         </label>
       </p>
-      <img :src=user.userProfilePhoto style="width: 30vw; height: 10vw">
+      <img :src=user.userProfilePhoto style="width: 30vw; height: 10vw" alt="profile">
     </div>
     <button @click="register" class="register-button">Register</button>
     <p>{{user}}</p>
+    <p>{{address}}</p>
   </div>
 </template>
 
 <script>
-import { register, uploadImg } from '../api/user'
+import { addAddress, register, uploadImg } from '../api/user'
 
 export default {
   name: 'Register',
@@ -48,13 +85,27 @@ export default {
         userGender: undefined,
         userHobby: undefined,
         userBday: undefined
-      }
+      },
+      address: [{
+        address: undefined,
+        addressType: undefined,
+        userId: undefined
+      }, {
+        address: undefined,
+        addressType: undefined,
+        userId: undefined
+      }]
     }
   },
   methods: {
     async register () {
       const res = await register(this.user)
       this.$store.commit('CALL_MESSAGE', { text: res })
+      for (const add of this.address) {
+        add.userId = res.uid
+        const addressRes = await addAddress(add)
+        this.$store.commit('CALL_MESSAGE', { text: addressRes })
+      }
     },
     async onUpload () {
       const f = this.$refs.img
