@@ -30,6 +30,7 @@
     <log4j.version>1.2.17</log4j.version>
     <junit.version>4.12</junit.version>
     <jwt.version>3.10.2</jwt.version>
+    <page.version>5.1.11</page.version>
   </properties>
 
   <dependencies>
@@ -153,6 +154,12 @@
       <groupId>org.mybatis.generator</groupId>
       <artifactId>mybatis-generator-core</artifactId>
       <version>${mybatis.generator.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>${page.version}</version>
     </dependency>
     <!--ORM end-->
 

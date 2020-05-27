@@ -15,17 +15,17 @@
   <mvc:annotation-driven/>
   <mvc:default-servlet-handler/>
 
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <mvc:mapping path="/users/**"/>
-      <bean class="me.jinwenjie.interceptor.SecurityUserInterceptor"/>
-    </mvc:interceptor>
+  <!--<mvc:interceptors>-->
+    <!--<mvc:interceptor>-->
+    <!--  <mvc:mapping path="/users/**"/>-->
+    <!--  <bean class="me.jinwenjie.interceptor.SecurityUserInterceptor"/>-->
+    <!--</mvc:interceptor>-->
     <!--<mvc:interceptor>-->
     <!--  <mvc:mapping path="/**"/>-->
     <!--  <mvc:exclude-mapping path="/users/**" />-->
     <!--  <bean class="me.jinwenjie.interceptor.SecurityInterceptor"/>-->
     <!--</mvc:interceptor>-->
-  </mvc:interceptors>
+  <!--</mvc:interceptors>-->
 
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix" value="/"/>

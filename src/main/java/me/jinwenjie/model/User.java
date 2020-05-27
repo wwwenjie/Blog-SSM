@@ -21,8 +21,6 @@ public class User {
 
     private String userIp;
 
-    private String userHobby;
-
     public User(Integer userId, String userName, String userEmail, String userPassword, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp) {
         this.userId = userId;
         this.userName = userName;
@@ -33,19 +31,6 @@ public class User {
         this.userBday = userBday;
         this.userRegistrationDate = userRegistrationDate;
         this.userIp = userIp;
-    }
-
-    public User(Integer userId, String userName, String userEmail, String userPassword, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp, String userHobby) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userProfilePhoto = userProfilePhoto;
-        this.userGender = userGender;
-        this.userBday = userBday;
-        this.userRegistrationDate = userRegistrationDate;
-        this.userIp = userIp;
-        this.userHobby = userHobby;
     }
 
     public User() {
@@ -122,13 +107,5 @@ public class User {
 
     public void setUserIp(String userIp) {
         this.userIp = userIp == null ? null : userIp.trim();
-    }
-
-    public String getUserHobby() {
-        return userHobby;
-    }
-
-    public void setUserHobby(String userHobby) {
-        this.userHobby = userHobby == null ? null : userHobby.trim();
     }
 }

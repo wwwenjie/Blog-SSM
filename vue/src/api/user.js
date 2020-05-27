@@ -42,3 +42,14 @@ export function getUserInfo (id) {
     method: 'GET'
   })
 }
+
+export function getUserList (pageNum = 1, pageSize = 5) {
+  return request({
+    url: '/users',
+    method: 'GET',
+    params: {
+      pageNum: pageNum,
+      pageSize: pageSize
+    }
+  })
+}
