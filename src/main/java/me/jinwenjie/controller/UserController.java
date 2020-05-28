@@ -5,10 +5,7 @@ import me.jinwenjie.model.User;
 import me.jinwenjie.service.UserService;
 import me.jinwenjie.util.JSONResult;
 import net.sf.json.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -32,12 +29,29 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping("/users/total")
+    public Integer getAllUser() {
+        return userService.count();
+    }
+
     @PostMapping("/users")
     public JSONObject creatUser(@RequestBody User user, HttpServletRequest request) {
         // 设置注册时间，IP
         user.setUserRegistrationDate(new Date());
         user.setUserIp(request.getRemoteAddr());
         userService.create(user);
+        return JSONResult.success();
+    }
+
+    @PatchMapping("/users")
+    public JSONObject updateUser(@RequestBody User user) {
+        userService.update(user);
+        return JSONResult.success();
+    }
+
+    @DeleteMapping("/users/{id}")
+    public JSONObject deleteUser(@PathVariable Integer id) {
+        userService.delete(id);
         return JSONResult.success();
     }
 

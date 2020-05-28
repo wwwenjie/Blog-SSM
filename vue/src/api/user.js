@@ -53,3 +53,25 @@ export function getUserList (pageNum = 1, pageSize = 5) {
     }
   })
 }
+
+export function getUserTotal () {
+  return request({
+    url: '/users/total',
+    method: 'GET'
+  })
+}
+
+export function updateUser (user) {
+  return request({
+    url: '/users',
+    method: 'PATCH',
+    data: user
+  })
+}
+
+export function deleteUser (id) {
+  return request({
+    url: `/users/${id}`,
+    method: 'DELETE'
+  })
+}

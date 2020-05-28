@@ -24,10 +24,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean create(User user) {
+    public Integer count() {
+        return userDao.count();
+    }
+
+    @Override
+    public void create(User user) {
         if (StringUtils.isEmpty(user.getUserEmail()) || StringUtils.isEmpty(user.getUserPassword())) {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_EMPTY);
         }
-        return userDao.insert(user) == 1;
+        userDao.insert(user);
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        userDao.deleteByPrimaryKey(id);
     }
 }

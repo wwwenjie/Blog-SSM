@@ -15,20 +15,17 @@ public class User {
 
     private String userGender;
 
-    private Date userBday;
-
     private Date userRegistrationDate;
 
     private String userIp;
 
-    public User(Integer userId, String userName, String userEmail, String userPassword, String userProfilePhoto, String userGender, Date userBday, Date userRegistrationDate, String userIp) {
+    public User(Integer userId, String userName, String userEmail, String userPassword, String userProfilePhoto, String userGender, Date userRegistrationDate, String userIp) {
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userProfilePhoto = userProfilePhoto;
         this.userGender = userGender;
-        this.userBday = userBday;
         this.userRegistrationDate = userRegistrationDate;
         this.userIp = userIp;
     }
@@ -85,14 +82,6 @@ public class User {
         this.userGender = userGender == null ? null : userGender.trim();
     }
 
-    public Date getUserBday() {
-        return userBday;
-    }
-
-    public void setUserBday(Date userBday) {
-        this.userBday = userBday;
-    }
-
     public Date getUserRegistrationDate() {
         return userRegistrationDate;
     }
@@ -107,5 +96,19 @@ public class User {
 
     public void setUserIp(String userIp) {
         this.userIp = userIp == null ? null : userIp.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userProfilePhoto='" + userProfilePhoto + '\'' +
+                ", userGender='" + userGender + '\'' +
+                ", userRegistrationDate=" + userRegistrationDate +
+                ", userIp='" + userIp + '\'' +
+                '}';
     }
 }

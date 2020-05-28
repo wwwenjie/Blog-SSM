@@ -143,8 +143,6 @@ CREATE TABLE `user` (
   `user_password` varchar(255) NOT NULL COMMENT '用户密码',
   `user_profile_photo` varchar(255) DEFAULT NULL COMMENT '用户头像',
   `user_gender` varchar(20) DEFAULT NULL COMMENT '用户性别',
-  `user_hobby` longtext COMMENT '用户爱好',
-  `user_bday` datetime DEFAULT NULL COMMENT '用户生日',
   `user_registration_date` datetime NOT NULL COMMENT '注册时间',
   `user_ip` varchar(20) NOT NULL COMMENT '用户注册IP'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

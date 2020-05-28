@@ -6,5 +6,12 @@ import java.util.List;
 
 public interface UserService {
     List<User> findAll();
-    boolean create(User user);
+
+    Integer count();
+
+    void create(User user);
+
+    void update(User user);
+
+    void delete(Integer id);
 }

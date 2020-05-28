@@ -3,55 +3,138 @@
 <mapper namespace="me.jinwenjie.dao.UserDao">
   <resultMap id="BaseResultMap" type="me.jinwenjie.model.User">
     <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="user_profile_photo" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="user_gender" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="user_bday" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-      <arg column="user_registration_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-      <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_profile_photo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_gender" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_registration_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, user_name, user_email, user_password, user_profile_photo, user_gender, user_bday, 
-    user_registration_date, user_ip
+    user_id, user_name, user_email, user_password, user_profile_photo, user_gender, user_registration_date, 
+    user_ip
   </sql>
   <select id="findAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"></include>
     from user
   </select>
+  <select id="count" resultType="java.lang.Integer">
+    select count(user_id)
+    from user
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
+    select 
+    <include refid="Base_Column_List" />
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete
-    from user
+    delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="me.jinwenjie.model.User">
-    insert into user (user_id, user_name, user_email,
-                      user_password, user_profile_photo, user_gender,
-                      user_bday, user_registration_date, user_ip)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR},
-            #{userPassword,jdbcType=VARCHAR}, #{userProfilePhoto,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR},
-            #{userBday,jdbcType=TIMESTAMP}, #{userRegistrationDate,jdbcType=TIMESTAMP}, #{userIp,jdbcType=VARCHAR})
+    insert into user (user_id, user_name, user_email, 
+      user_password, user_profile_photo, user_gender, 
+      user_registration_date, user_ip)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userProfilePhoto,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR}, 
+      #{userRegistrationDate,jdbcType=TIMESTAMP}, #{userIp,jdbcType=VARCHAR})
   </insert>
+  <insert id="insertSelective" parameterType="me.jinwenjie.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userProfilePhoto != null">
+        user_profile_photo,
+      </if>
+      <if test="userGender != null">
+        user_gender,
+      </if>
+      <if test="userRegistrationDate != null">
+        user_registration_date,
+      </if>
+      <if test="userIp != null">
+        user_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userProfilePhoto != null">
+        #{userProfilePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null">
+        #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userRegistrationDate != null">
+        #{userRegistrationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userIp != null">
+        #{userIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.jinwenjie.model.User">
+    update user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userProfilePhoto != null">
+        user_profile_photo = #{userProfilePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null">
+        user_gender = #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userRegistrationDate != null">
+        user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userIp != null">
+        user_ip = #{userIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.User">
     update user
-    set user_name              = #{userName,jdbcType=VARCHAR},
-        user_email             = #{userEmail,jdbcType=VARCHAR},
-        user_password          = #{userPassword,jdbcType=VARCHAR},
-        user_profile_photo     = #{userProfilePhoto,jdbcType=VARCHAR},
-        user_gender            = #{userGender,jdbcType=VARCHAR},
-        user_bday              = #{userBday,jdbcType=TIMESTAMP},
-        user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
-        user_ip                = #{userIp,jdbcType=VARCHAR}
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_profile_photo = #{userProfilePhoto,jdbcType=VARCHAR},
+      user_gender = #{userGender,jdbcType=VARCHAR},
+      user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
+      user_ip = #{userIp,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

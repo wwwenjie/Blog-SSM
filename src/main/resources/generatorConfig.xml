@@ -48,10 +48,6 @@
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
     <table tableName="user" mapperName="UserDao"
-           enableInsert="false"
-           enableDeleteByPrimaryKey="false"
-           enableSelectByPrimaryKey="false"
-           enableUpdateByPrimaryKey="false"
            escapeWildcards="false"
            enableCountByExample="false"
            enableUpdateByExample="false"

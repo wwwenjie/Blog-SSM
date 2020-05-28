@@ -7,7 +7,9 @@ import java.util.List;
 public interface UserDao {
     List<User> findAll();
 
-    int deleteByPrimaryKey(Integer userId);
+    int count();
+
+    void deleteByPrimaryKey(Integer userId);
 
     int insert(User record);
 
@@ -15,7 +17,7 @@ public interface UserDao {
 
     User selectByPrimaryKey(Integer userId);
 
-    int updateByPrimaryKeySelective(User record);
+    void updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+    void updateByPrimaryKey(User record);
 }
