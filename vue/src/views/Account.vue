@@ -74,7 +74,10 @@
                 注册
               </v-btn>
               <v-spacer />
-              <v-btn color="primary">
+              <v-btn
+                color="primary"
+                @click="login"
+              >
                 登陆
               </v-btn>
             </v-card-actions>
@@ -108,12 +111,13 @@ export default {
         this.title = '注册'
         this.loginMode = false
       } else {
-        console.log(this.$data.user.userGender)
         await register(this.user)
       }
     },
     async login () {
-      await login(this.user)
+      this.loginMode = true
+      const auth = await login(this.user)
+      localStorage.setItem('token', auth.token)
     }
   }
 }

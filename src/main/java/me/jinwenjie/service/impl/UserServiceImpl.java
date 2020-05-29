@@ -19,6 +19,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer getLoginUid(String email, String password) {
+        return userDao.getLoginUid(email, password);
+    }
+
+    @Override
     public List<User> findAll() {
         return userDao.findAll();
     }
@@ -26,6 +31,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer count() {
         return userDao.count();
+    }
+
+    @Override
+    public User get(Integer id){
+        return userDao.selectByPrimaryKey(id);
     }
 
     @Override

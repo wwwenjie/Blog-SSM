@@ -1,6 +1,7 @@
 package me.jinwenjie.dao;
 
 import me.jinwenjie.model.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface UserDao {
     void updateByPrimaryKeySelective(User record);
 
     void updateByPrimaryKey(User record);
+
+    Integer getLoginUid(@Param("email") String email, @Param("password") String password);
 }

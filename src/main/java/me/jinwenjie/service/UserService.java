@@ -9,9 +9,13 @@ public interface UserService {
 
     Integer count();
 
+    User get(Integer id);
+
     void create(User user);
 
     void update(User user);
 
     void delete(Integer id);
+
+    Integer getLoginUid(String email, String password);
 }

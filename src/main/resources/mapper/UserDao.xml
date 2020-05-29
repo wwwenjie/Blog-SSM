@@ -3,14 +3,14 @@
 <mapper namespace="me.jinwenjie.dao.UserDao">
   <resultMap id="BaseResultMap" type="me.jinwenjie.model.User">
     <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="user_profile_photo" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="user_gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="user_registration_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="user_profile_photo" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="user_gender" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="user_registration_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
@@ -27,22 +27,23 @@
     from user
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete
+    from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="me.jinwenjie.model.User">
-    insert into user (user_id, user_name, user_email, 
-      user_password, user_profile_photo, user_gender, 
-      user_registration_date, user_ip)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{userPassword,jdbcType=VARCHAR}, #{userProfilePhoto,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR}, 
-      #{userRegistrationDate,jdbcType=TIMESTAMP}, #{userIp,jdbcType=VARCHAR})
+    insert into user (user_id, user_name, user_email,
+                      user_password, user_profile_photo, user_gender,
+                      user_registration_date, user_ip)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR},
+            #{userPassword,jdbcType=VARCHAR}, #{userProfilePhoto,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR},
+            #{userRegistrationDate,jdbcType=TIMESTAMP}, #{userIp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="me.jinwenjie.model.User">
     insert into user
@@ -128,13 +129,20 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.User">
     update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      user_email = #{userEmail,jdbcType=VARCHAR},
-      user_password = #{userPassword,jdbcType=VARCHAR},
-      user_profile_photo = #{userProfilePhoto,jdbcType=VARCHAR},
-      user_gender = #{userGender,jdbcType=VARCHAR},
-      user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
-      user_ip = #{userIp,jdbcType=VARCHAR}
+    set user_name              = #{userName,jdbcType=VARCHAR},
+        user_email             = #{userEmail,jdbcType=VARCHAR},
+        user_password          = #{userPassword,jdbcType=VARCHAR},
+        user_profile_photo     = #{userProfilePhoto,jdbcType=VARCHAR},
+        user_gender            = #{userGender,jdbcType=VARCHAR},
+        user_registration_date = #{userRegistrationDate,jdbcType=TIMESTAMP},
+        user_ip                = #{userIp,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  <select id="getLoginUid" resultType="java.lang.Integer">
+    select user_id
+    from user
+    where user_email = #{email}
+      and user_password = #{password}
+    limit 1
+  </select>
 </mapper>

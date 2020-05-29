@@ -15,22 +15,17 @@ public class SecurityUserInterceptor implements HandlerInterceptor {
         // Bearer xxx
         String token = request.getHeader("Authorization");
         token = token == null ? "" : token.split(" ")[1];
-        // URI: /users
-        if (request.getRequestURI().equals("/users")) {
-            switch (method) {
-                // admin
-                case "GET":
-                    if (JWTUtil.checkAdmin(token)) {
-                        return true;
-                    } else {
-                        throw new CustomException(ExceptionEnum.AUTH_NOT_ADMIN);
-                    }
-                // everyone
-                case "POST":
-                    return true;
-                // refuse others
-                default:
-                    return false;
+        // URI: /users /users/total
+        if (request.getRequestURI().equals("/users") || request.getRequestURI().equals("/users/total")) {
+            // register for everyone
+            if ("POST".equals(method)) {
+                return true;
+            }
+            // check others
+            if (JWTUtil.checkAdmin(token)) {
+                return true;
+            } else {
+                throw new CustomException(ExceptionEnum.AUTH_NOT_ADMIN);
             }
         }
         // URI: /users/uid

@@ -1,9 +1,13 @@
 package me.jinwenjie.controller;
 
 import com.github.pagehelper.PageHelper;
+import me.jinwenjie.errorhandle.CustomException;
+import me.jinwenjie.errorhandle.ExceptionEnum;
 import me.jinwenjie.model.User;
+import me.jinwenjie.service.AuthService;
 import me.jinwenjie.service.UserService;
 import me.jinwenjie.util.JSONResult;
+import me.jinwenjie.util.JWTUtil;
 import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +18,26 @@ import java.util.List;
 // RESTful 风格接口设计，接受返回 json 数据
 @RestController
 public class UserController {
-
+    private final AuthService authService;
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
+    }
+
+    @PostMapping("/tokens")
+    public JSONObject login(@RequestBody User user) {
+        Integer uid = userService.getLoginUid(user.getUserEmail(), user.getUserPassword());
+        if (uid != null) {
+            if (authService.isAdmin(uid)) {
+                return JSONResult.singleResult("token", JWTUtil.sign(uid, true));
+            } else {
+                return JSONResult.singleResult("token", JWTUtil.sign(uid));
+            }
+        } else {
+            throw new CustomException(ExceptionEnum.USER_ACCOUNT_WRONG);
+        }
     }
 
     @GetMapping("/users")
@@ -30,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping("/users/total")
-    public Integer getAllUser() {
+    public Integer countTotalUser() {
         return userService.count();
     }
 
