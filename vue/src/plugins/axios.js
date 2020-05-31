@@ -2,7 +2,7 @@
 // https://panjiachen.github.io/vue-element-admin-site/guide/essentials/server.html#front-end-request-flow
 
 import axios from 'axios'
-import store from '../store'
+import Message from '../util/message'
 
 // get token from localStorage
 const token = localStorage.getItem('token')
@@ -54,7 +54,7 @@ service.interceptors.response.use(
     const res = response.data
     // status is 200, but has error code
     if (res.code && res.error) {
-      store.commit('CALL_MESSAGE', { text: res, timeout: 4000 })
+      Message.error(res)
       console.log(res) // for debug
       return Promise.reject(new Error(res.error || 'Error'))
     } else {
@@ -67,7 +67,7 @@ service.interceptors.response.use(
     // error: code(Number) error(String)
     const e = error.response.data
     if (e.code && e.error) {
-      store.commit('CALL_MESSAGE', { text: e, timeout: 4000 })
+      Message.error(e.error)
       return Promise.reject(e)
     } else {
       // unknown error

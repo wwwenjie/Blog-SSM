@@ -30,13 +30,17 @@
 
         <v-spacer />
 
-        <v-text-field
-          append-icon="mdi-magnify"
-          flat
-          hide-details
-          solo-inverted
-          style="max-width: 300px;"
-        />
+        <router-link
+          to="account"
+          style="text-decoration: none"
+        >
+          <v-btn
+            text
+            class="hidden-sm-and-down"
+          >
+            Login
+          </v-btn>
+        </router-link>
       </v-row>
     </v-container>
   </v-app-bar>

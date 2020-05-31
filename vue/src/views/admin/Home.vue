@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { getUserTotal } from '../../api/user'
+
 export default {
   name: 'AdminHome',
   data: () => ({
@@ -63,7 +65,17 @@ export default {
     items: [
       { icon: 'mdi-contacts', text: '用户' }
     ]
-  })
+  }),
+  async beforeRouteEnter (to, from, next) {
+    try {
+      // 请求一个需要权限的资源
+      await getUserTotal()
+      next()
+      // 若 401 错误则跳转登陆页面
+    } catch (e) {
+      next({ path: '/account' })
+    }
+  }
 }
 </script>
 

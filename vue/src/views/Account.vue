@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import Message from '../util/message'
 import { login, register } from '../api/user'
 
 export default {
@@ -112,12 +113,16 @@ export default {
         this.loginMode = false
       } else {
         await register(this.user)
+        Message.success()
+        this.loginMode = true
       }
     },
     async login () {
       this.loginMode = true
       const auth = await login(this.user)
       localStorage.setItem('token', auth.token)
+      Message.success()
+      await this.$router.push({ path: 'admin' })
     }
   }
 }
