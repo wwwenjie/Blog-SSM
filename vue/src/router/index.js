@@ -3,12 +3,12 @@ import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import AdminHome from '../views/admin/Home.vue'
 import User from '../views/admin/User'
+import Index from '../views/admin/Index'
 import Account from '../views/Account'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -27,6 +27,12 @@ export default new Router({
       component: AdminHome,
       children: [
         {
+          name: 'adminIndex',
+          path: 'index',
+          component: Index
+        },
+        {
+          name: 'userList',
           path: 'user',
           component: User
         }

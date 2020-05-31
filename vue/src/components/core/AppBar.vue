@@ -31,7 +31,7 @@
         <v-spacer />
 
         <router-link
-          to="account"
+          to="admin/index"
           style="text-decoration: none"
         >
           <v-btn
