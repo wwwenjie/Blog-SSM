@@ -90,6 +90,7 @@
 
 <script>
 import Message from '../util/message'
+import axios from '../plugins/axios'
 import { login, register } from '../api/user'
 
 export default {
@@ -121,8 +122,9 @@ export default {
       this.loginMode = true
       const auth = await login(this.user)
       localStorage.setItem('token', auth.token)
+      axios.defaults.headers.Authorization = `Bearer ${auth.token}`
       Message.success()
-      await this.$router.push({ path: 'admin' })
+      await this.$router.push({ name: 'adminIndex' })
     }
   }
 }

@@ -10,6 +10,7 @@
           <v-list-item
             :key="item.text"
             link
+            :to="{name: item.route}"
           >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -34,8 +35,25 @@
       <v-toolbar-title
         style="width: 300px"
         class="ml-0 pl-4"
+        @click="$router.push({ name: 'adminIndex' })"
       >
         <span class="hidden-sm-and-down">博客后台管理</span>
+      </v-toolbar-title>
+      <v-spacer />
+      <v-toolbar-title
+        class="mr-6"
+        @click="$router.push({ name: 'home' })"
+      >
+        <v-btn outlined>
+          博客首页
+        </v-btn>
+      </v-toolbar-title>
+      <v-toolbar-title
+        @click="logout"
+      >
+        <v-btn outlined>
+          登出
+        </v-btn>
       </v-toolbar-title>
     </v-app-bar>
     <v-content>
@@ -55,6 +73,7 @@
 </template>
 
 <script>
+import axios from '../../plugins/axios'
 import { getUserTotal } from '../../api/user'
 
 export default {
@@ -63,7 +82,11 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-      { icon: 'mdi-contacts', text: '用户' }
+      {
+        icon: 'mdi-contacts',
+        text: '用户',
+        route: 'userList'
+      }
     ]
   }),
   async beforeRouteEnter (to, from, next) {
@@ -74,6 +97,12 @@ export default {
       // 若 401 错误则跳转登陆页面
     } catch (e) {
       next({ path: '/account' })
+    }
+  },
+  methods: {
+    logout () {
+      axios.defaults.headers.Authorization = null
+      this.$router.push({ name: 'account' })
     }
   }
 }
