@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.jinwenjie.dao.AuthorityDao">
+  <resultMap id="BaseResultMap" type="me.jinwenjie.model.Authority">
+    <constructor>
+      <arg column="auth_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </constructor>
+  </resultMap>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select auth_id, name, url
+    from authority
+    where auth_id = (select role.auth_id from role where user_id = #{userId})
+  </select>
+  <insert id="createAuth">
+    insert into authority
+    set name=#{name},
+        url=#{url}
+  </insert>
+  <delete id="deleteAuth">
+    delete
+    from authority
+    where auth_id = #{authId}
+  </delete>
+  <update id="updateAuth">
+    update authority
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="url != null">
+        url = #{url},
+      </if>
+    </set>
+    where auth_id = #{authId}
+  </update>
+</mapper>

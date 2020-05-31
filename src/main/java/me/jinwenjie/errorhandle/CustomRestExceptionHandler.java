@@ -23,16 +23,18 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     // handle unexpected error
     @ExceptionHandler()
     @ResponseBody
-    public ErrorDTO handleUnexpectedException(Exception e) {
-        return new ErrorDTO(500, e.getLocalizedMessage(), "Unexpected error: " + e);
+    public ResponseEntity<Object> handleUnexpectedException(Exception e) {
+        final ErrorDTO unexpectedError = new ErrorDTO(500, e.getLocalizedMessage(), "Unexpected error: " + e);
+        return new ResponseEntity<Object>(unexpectedError, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // handle DAO error
     @ExceptionHandler(DataAccessException.class)
     @ResponseBody
-    public ErrorDTO handleDaoException(Exception e) {
+    public ResponseEntity<Object> handleDaoException(Exception e) {
         // the class name will show possible error
-        return new ErrorDTO(500, e.getClass().toString(), e);
+        final ErrorDTO daoError = new ErrorDTO(500, e.getClass().toString(), e);
+        return new ResponseEntity<Object>(daoError, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // handle http method error

@@ -1,5 +1,7 @@
 package me.jinwenjie.interceptor;
 
+import me.jinwenjie.errorhandle.CustomException;
+import me.jinwenjie.errorhandle.ExceptionEnum;
 import me.jinwenjie.util.JWTUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -13,18 +15,17 @@ public class SecurityUserInterceptor implements HandlerInterceptor {
         // Bearer xxx
         String token = request.getHeader("Authorization");
         token = token == null ? "" : token.split(" ")[1];
-        // URI: /users
-        if (request.getRequestURI().equals("/users")) {
-            switch (method) {
-                // admin
-                case "GET":
-                    return JWTUtil.checkAdmin(token);
-                // everyone
-                case "POST":
-                    return true;
-                // refuse others
-                default:
-                    return false;
+        // URI: /users /users/total
+        if (request.getRequestURI().equals("/users") || request.getRequestURI().equals("/users/total")) {
+            // register for everyone
+            if ("POST".equals(method)) {
+                return true;
+            }
+            // check others
+            if (JWTUtil.checkAdmin(token)) {
+                return true;
+            } else {
+                throw new CustomException(ExceptionEnum.AUTH_NOT_ADMIN);
             }
         }
         // URI: /users/uid
@@ -33,11 +34,19 @@ public class SecurityUserInterceptor implements HandlerInterceptor {
             // user self or admin
             case "GET":
             case "PUT":
-                return JWTUtil.getUserId(token).equals(uid) || JWTUtil.checkAdmin(token);
-            // admin
+                if (JWTUtil.getUserId(token).equals(uid) || JWTUtil.checkAdmin(token)) {
+                    return true;
+                } else {
+                    throw new CustomException(ExceptionEnum.AUTH_REQUIRED);
+                }
+                // admin
             case "DELETED":
-                return JWTUtil.checkAdmin(token);
-            // refuse others
+                if (JWTUtil.checkAdmin(token)) {
+                    return true;
+                } else {
+                    throw new CustomException(ExceptionEnum.AUTH_NOT_ADMIN);
+                }
+                // refuse others
             default:
                 return false;
         }

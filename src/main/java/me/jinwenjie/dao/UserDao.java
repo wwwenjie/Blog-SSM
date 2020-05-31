@@ -1,30 +1,26 @@
 package me.jinwenjie.dao;
 
-import java.util.List;
 import me.jinwenjie.model.User;
-import me.jinwenjie.model.UserExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserDao {
-    long countByExample(UserExample example);
+    List<User> findAll();
 
-    int deleteByExample(UserExample example);
+    int count();
 
-    int deleteByPrimaryKey(Integer userId);
+    void deleteByPrimaryKey(Integer userId);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    List<User> selectByExample(UserExample example);
-
     User selectByPrimaryKey(Integer userId);
 
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+    void updateByPrimaryKeySelective(User record);
 
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+    void updateByPrimaryKey(User record);
 
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+    Integer getLoginUid(@Param("email") String email, @Param("password") String password);
 }

@@ -47,34 +47,12 @@
                          targetProject="src/main/java" type="XMLMAPPER">
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
-
-    <table tableName="article" mapperName="ArticleDao"/>
-    <table tableName="article_category" mapperName="ArticleCategoryDao"
+    <table tableName="user" mapperName="UserDao"
+           escapeWildcards="false"
            enableCountByExample="false"
            enableUpdateByExample="false"
            enableDeleteByExample="false"
            enableSelectByExample="false"
            selectByExampleQueryId="false"/>
-    <table tableName="article_label" mapperName="ArticleLabelDao"
-           enableCountByExample="false"
-           enableUpdateByExample="false"
-           enableDeleteByExample="false"
-           enableSelectByExample="false"
-           selectByExampleQueryId="false"/>
-    <table tableName="category" mapperName="CategoryDao"
-           enableCountByExample="false"
-           enableUpdateByExample="false"
-           enableDeleteByExample="false"
-           enableSelectByExample="false"
-           selectByExampleQueryId="false"/>
-    <table tableName="comment" mapperName="CommentDao"/>
-    <table tableName="label" mapperName="LabelDao"
-           enableCountByExample="false"
-           enableUpdateByExample="false"
-           enableDeleteByExample="false"
-           enableSelectByExample="false"
-           selectByExampleQueryId="false"/>
-    <table tableName="option" delimitIdentifiers="true" mapperName="OptionDao"/>
-    <table tableName="user" mapperName="UserDao"/>
   </context>
 </generatorConfiguration>

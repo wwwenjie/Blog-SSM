@@ -1,12 +1,10 @@
 package me.jinwenjie.service.impl;
 
-import me.jinwenjie.dao.OptionDao;
+import com.alibaba.druid.util.StringUtils;
 import me.jinwenjie.dao.UserDao;
 import me.jinwenjie.errorhandle.CustomException;
 import me.jinwenjie.errorhandle.ExceptionEnum;
-import me.jinwenjie.model.OptionExample;
 import me.jinwenjie.model.User;
-import me.jinwenjie.model.UserExample;
 import me.jinwenjie.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -15,56 +13,46 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-    private final OptionDao optionDao;
 
-    public UserServiceImpl(UserDao userDao, OptionDao optionDao) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
-        this.optionDao = optionDao;
     }
 
     @Override
     public Integer getLoginUid(String email, String password) {
-        // todo: encrypt
-        UserExample example = new UserExample();
-        example.or().andUserEmailEqualTo(email).andUserPasswordEqualTo(password);
-        List<User> resultList = userDao.selectByExample(example);
-        return resultList.isEmpty() ? null : resultList.get(0).getUserId();
+        return userDao.getLoginUid(email, password);
     }
 
     @Override
-    public String getAdminEmail() {
-        OptionExample example = new OptionExample();
-        example.or().andOptionNameEqualTo("admin_email");
-        // add blob to load blob(option_value)
-        return optionDao.selectByExampleWithBLOBs(example).get(0).getOptionValue();
+    public List<User> findAll() {
+        return userDao.findAll();
     }
 
     @Override
-    public List<User> list() {
-        UserExample example = new UserExample();
-        return userDao.selectByExample(example);
+    public Integer count() {
+        return userDao.count();
     }
 
     @Override
-    public User get(Integer id) {
+    public User get(Integer id){
         return userDao.selectByPrimaryKey(id);
     }
 
     @Override
-    public boolean create(User user) {
-        if (user.getUserEmail() == null && user.getUserTelephoneNumber() == null) {
+    public void create(User user) {
+        if (StringUtils.isEmpty(user.getUserEmail()) || StringUtils.isEmpty(user.getUserPassword())) {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_EMPTY);
         }
-        return userDao.insert(user) == 1;
+        userDao.insert(user);
     }
 
     @Override
-    public boolean update(User user) {
-        return userDao.updateByPrimaryKeySelective(user) == 1;
+    public void update(User user) {
+        userDao.updateByPrimaryKeySelective(user);
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return userDao.deleteByPrimaryKey(id) == 1;
+    public void delete(Integer id) {
+        userDao.deleteByPrimaryKey(id);
     }
 }

@@ -36,14 +36,4 @@ public class CustomRestExceptionHandlerTest {
         assertEquals(STATUS, result.getStatusCode());
         assertNull(errorDTO.getDetail());
     }
-
-    @Test
-    public void handleUnexpectedException() {
-        Exception exception = new Exception(ERROR);
-        CustomRestExceptionHandler test = new CustomRestExceptionHandler();
-        ErrorDTO errorDTO = test.handleUnexpectedException(exception);
-        assertEquals((Integer) 500, errorDTO.getCode());
-        assertEquals(ERROR, errorDTO.getError());
-        assertEquals("Unexpected error: " + exception, errorDTO.getDetail());
-    }
 }

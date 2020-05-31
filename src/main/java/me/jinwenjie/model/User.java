@@ -7,27 +7,27 @@ public class User {
 
     private String userName;
 
-    private String userPassword;
-
     private String userEmail;
 
+    private String userPassword;
+
     private String userProfilePhoto;
+
+    private String userGender;
 
     private Date userRegistrationDate;
 
     private String userIp;
 
-    private Integer userTelephoneNumber;
-
-    public User(Integer userId, String userName, String userPassword, String userEmail, String userProfilePhoto, Date userRegistrationDate, String userIp, Integer userTelephoneNumber) {
+    public User(Integer userId, String userName, String userEmail, String userPassword, String userProfilePhoto, String userGender, Date userRegistrationDate, String userIp) {
         this.userId = userId;
         this.userName = userName;
-        this.userPassword = userPassword;
         this.userEmail = userEmail;
+        this.userPassword = userPassword;
         this.userProfilePhoto = userProfilePhoto;
+        this.userGender = userGender;
         this.userRegistrationDate = userRegistrationDate;
         this.userIp = userIp;
-        this.userTelephoneNumber = userTelephoneNumber;
     }
 
     public User() {
@@ -50,14 +50,6 @@ public class User {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword == null ? null : userPassword.trim();
-    }
-
     public String getUserEmail() {
         return userEmail;
     }
@@ -66,12 +58,28 @@ public class User {
         this.userEmail = userEmail == null ? null : userEmail.trim();
     }
 
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword == null ? null : userPassword.trim();
+    }
+
     public String getUserProfilePhoto() {
         return userProfilePhoto;
     }
 
     public void setUserProfilePhoto(String userProfilePhoto) {
         this.userProfilePhoto = userProfilePhoto == null ? null : userProfilePhoto.trim();
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender == null ? null : userGender.trim();
     }
 
     public Date getUserRegistrationDate() {
@@ -90,11 +98,17 @@ public class User {
         this.userIp = userIp == null ? null : userIp.trim();
     }
 
-    public Integer getUserTelephoneNumber() {
-        return userTelephoneNumber;
-    }
-
-    public void setUserTelephoneNumber(Integer userTelephoneNumber) {
-        this.userTelephoneNumber = userTelephoneNumber;
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userProfilePhoto='" + userProfilePhoto + '\'' +
+                ", userGender='" + userGender + '\'' +
+                ", userRegistrationDate=" + userRegistrationDate +
+                ", userIp='" + userIp + '\'' +
+                '}';
     }
 }

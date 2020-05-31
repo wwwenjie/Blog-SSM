@@ -5,17 +5,17 @@ import me.jinwenjie.model.User;
 import java.util.List;
 
 public interface UserService {
-    Integer getLoginUid(String email, String password);
+    List<User> findAll();
 
-    String getAdminEmail();
-
-    List<User> list();
+    Integer count();
 
     User get(Integer id);
 
-    boolean create(User user);
+    void create(User user);
 
-    boolean update(User user);
+    void update(User user);
 
-    boolean delete(Integer id);
+    void delete(Integer id);
+
+    Integer getLoginUid(String email, String password);
 }
