@@ -61,7 +61,7 @@ public class ArticleController {
     }
 
     @PatchMapping("")
-    public JSONObject update(Article article) {
+    public JSONObject update(@RequestBody Article article) {
         articleService.update(article);
         return JSONResult.success();
     }

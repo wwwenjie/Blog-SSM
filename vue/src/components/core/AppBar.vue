@@ -17,16 +17,16 @@
           Blog
         </h1>
 
-        <v-btn
-          v-for="(link, i) in links"
-          :key="i"
-          v-bind="link"
-          class="hidden-sm-and-down"
-          text
-          @click="onClick($event, link)"
-        >
-          {{ link.text }}
-        </v-btn>
+        <!--        <v-btn-->
+        <!--          v-for="(link, i) in links"-->
+        <!--          :key="i"-->
+        <!--          v-bind="link"-->
+        <!--          class="hidden-sm-and-down"-->
+        <!--          text-->
+        <!--          @click="onClick($event, link)"-->
+        <!--        >-->
+        <!--          {{ link.text }}-->
+        <!--        </v-btn>-->
 
         <v-spacer />
 
@@ -49,16 +49,11 @@
 <script>
 // Utilities
 import {
-  mapGetters,
   mapMutations
 } from 'vuex'
 
 export default {
   name: 'CoreAppBar',
-
-  computed: {
-    ...mapGetters(['links'])
-  },
 
   methods: {
     ...mapMutations(['toggleDrawer']),

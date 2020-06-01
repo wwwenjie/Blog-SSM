@@ -6,9 +6,7 @@
 
     <v-content id="content">
       <div id="home">
-        <articles>
-          <banner />
-        </articles>
+        <articles />
 
         <social />
       </div>
@@ -24,7 +22,6 @@ export default {
 
   components: {
     Articles: () => import('../components/home/Articles'),
-    Banner: () => import('../components/home/Banner'),
     Social: () => import('../components/home/Social'),
     CoreDrawer: () => import('../components/core/Drawer'),
     CoreFooter: () => import('../components/core/Footer'),

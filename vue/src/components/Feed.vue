@@ -6,8 +6,8 @@
       </v-col>
 
       <feed-card
-        v-for="(article, i) in paginatedArticles"
-        :key="article.title"
+        v-for="(article, i) in articles"
+        :key="article.articleId"
         :size="layout[i]"
         :value="article"
       />
@@ -53,9 +53,7 @@
 
 <script>
 // Utilities
-import {
-  mapState
-} from 'vuex'
+import { getArticleList, getArticleTotal } from '../api/article'
 
 export default {
   name: 'Feed',
@@ -65,27 +63,22 @@ export default {
   },
 
   data: () => ({
-    layout: [2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 3],
-    page: 1
+    articles: undefined,
+    layout: [1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3],
+    page: 1,
+    pages: 1
   }),
 
-  computed: {
-    ...mapState(['articles']),
-    pages () {
-      return Math.ceil(this.articles.length / 11)
-    },
-    paginatedArticles () {
-      const start = (this.page - 1) * 11
-      const stop = this.page * 11
-
-      return this.articles.slice(start, stop)
+  watch: {
+    async page () {
+      window.scrollTo(0, 0)
+      this.articles = await getArticleList(this.page, 8)
     }
   },
 
-  watch: {
-    page () {
-      window.scrollTo(0, 0)
-    }
+  async mounted () {
+    this.articles = await getArticleList(0, 8)
+    this.pages = Math.ceil(await getArticleTotal() / 8)
   }
 }
 </script>

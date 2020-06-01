@@ -7,7 +7,7 @@
       :height="value.prominent ? 450 : 350"
       color="grey lighten-1"
       dark
-      href="#!"
+      @click="onClick(value.articleId)"
     >
       <v-img
         height="100%"
@@ -26,15 +26,15 @@
               small
               @click.stop=""
             >
-              {{ value.category }}
+              {{ value.articleCategory }}
             </v-chip>
 
             <h3 class="title font-weight-bold mb-2">
-              {{ value.title }}
+              {{ value.articleTitle }}
             </h3>
 
             <div class="caption">
-              {{ value.author }}<br>Date
+              {{ new Date(value.articleLastModifyDate + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ') }}
             </div>
           </v-col>
 
@@ -46,7 +46,7 @@
               small
               @click.stop=""
             >
-              Read More
+              更多
             </v-chip>
           </v-col>
         </v-row>
@@ -67,6 +67,11 @@ export default {
     value: {
       type: Object,
       default: () => ({})
+    }
+  },
+  methods: {
+    onClick (id) {
+      console.log(id)
     }
   }
 }

@@ -40,7 +40,7 @@
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
-import { creatArticle, getArticle } from '../../api/article'
+import { creatArticle, getArticle, updateArticle } from '../../api/article'
 import Message from '../../util/message'
 export default {
   name: 'Editor',
@@ -66,7 +66,11 @@ export default {
   },
   methods: {
     async save () {
-      await creatArticle(this.article)
+      if (this.$route.query.id) {
+        await updateArticle(this.article)
+      } else {
+        await creatArticle(this.article)
+      }
       Message.success()
     }
   }
