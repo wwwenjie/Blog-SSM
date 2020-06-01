@@ -165,7 +165,8 @@ export default {
         {
           text: '注册IP',
           value: 'userIp'
-        }, {
+        },
+        {
           text: '操作',
           value: 'actions',
           sortable: false

@@ -8,21 +8,32 @@
         <v-card-text>{{ totalUsers }}</v-card-text>
       </v-card>
     </v-col>
+    <v-col
+      cols="4"
+    >
+      <v-card>
+        <v-card-title>博客总数</v-card-title>
+        <v-card-text>{{ totalArticles }}</v-card-text>
+      </v-card>
+    </v-col>
   </v-row>
 </template>
 
 <script>
 import { getUserTotal } from '../../api/user'
+import { getArticleTotal } from '../../api/article'
 
 export default {
   name: 'Index',
   data () {
     return {
-      totalUsers: undefined
+      totalUsers: undefined,
+      totalArticles: undefined
     }
   },
   async mounted () {
     this.totalUsers = await getUserTotal()
+    this.totalArticles = await getArticleTotal()
   }
 }
 </script>

@@ -84,8 +84,18 @@ export default {
     items: [
       {
         icon: 'mdi-contacts',
-        text: '用户',
+        text: '用户列表',
         route: 'userList'
+      },
+      {
+        icon: 'mdi-post',
+        text: '博文列表',
+        route: 'article'
+      },
+      {
+        icon: 'mdi-pencil',
+        text: '编辑博文',
+        route: 'edit'
       }
     ]
   }),

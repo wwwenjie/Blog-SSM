@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.jinwenjie.dao.ArticleDao">
+  <resultMap id="BaseResultMap" type="me.jinwenjie.model.Article">
+    <constructor>
+      <idArg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="article_category" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="article_title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="article_image" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="article_views" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="article_comment_count" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="article_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="article_last_modify_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="me.jinwenjie.model.Article">
+    <constructor>
+      <idArg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="article_category" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="article_title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="article_image" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="article_views" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="article_comment_count" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="article_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="article_last_modify_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="article_content" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    article_id, user_id, article_category, article_title, article_image, article_views, 
+    article_comment_count, article_date, article_last_modify_date
+  </sql>
+  <sql id="Blob_Column_List">
+    article_content
+  </sql>
+  <select id="findAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from article
+  </select>
+  <select id="count" resultType="java.lang.Integer">
+    select count(article_id)
+    from article
+  </select>
+  <select id="getByCategory" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from article
+    where article_category=#{category}
+  </select>
+  <select id="getByUserId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from article
+    where user_id=#{uid}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete
+    from article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="me.jinwenjie.model.Article">
+    insert into article (article_id, user_id, article_category,
+                         article_title, article_image, article_views,
+                         article_comment_count, article_date, article_last_modify_date,
+                         article_content)
+    values (#{articleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{articleCategory,jdbcType=VARCHAR},
+            #{articleTitle,jdbcType=VARCHAR}, #{articleImage,jdbcType=VARCHAR}, #{articleViews,jdbcType=INTEGER},
+            #{articleCommentCount,jdbcType=INTEGER}, #{articleDate,jdbcType=TIMESTAMP},
+            #{articleLastModifyDate,jdbcType=TIMESTAMP},
+            #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="me.jinwenjie.model.Article">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="articleCategory != null">
+        article_category,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="articleImage != null">
+        article_image,
+      </if>
+      <if test="articleViews != null">
+        article_views,
+      </if>
+      <if test="articleCommentCount != null">
+        article_comment_count,
+      </if>
+      <if test="articleDate != null">
+        article_date,
+      </if>
+      <if test="articleLastModifyDate != null">
+        article_last_modify_date,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="articleCategory != null">
+        #{articleCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImage != null">
+        #{articleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="articleViews != null">
+        #{articleViews,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentCount != null">
+        #{articleCommentCount,jdbcType=INTEGER},
+      </if>
+      <if test="articleDate != null">
+        #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleLastModifyDate != null">
+        #{articleLastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.jinwenjie.model.Article">
+    update article
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="articleCategory != null">
+        article_category = #{articleCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImage != null">
+        article_image = #{articleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="articleViews != null">
+        article_views = #{articleViews,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentCount != null">
+        article_comment_count = #{articleCommentCount,jdbcType=INTEGER},
+      </if>
+      <if test="articleDate != null">
+        article_date = #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleLastModifyDate != null">
+        article_last_modify_date = #{articleLastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="me.jinwenjie.model.Article">
+    update article
+    set user_id                  = #{userId,jdbcType=INTEGER},
+        article_category         = #{articleCategory,jdbcType=VARCHAR},
+        article_title            = #{articleTitle,jdbcType=VARCHAR},
+        article_image            = #{articleImage,jdbcType=VARCHAR},
+        article_views            = #{articleViews,jdbcType=INTEGER},
+        article_comment_count    = #{articleCommentCount,jdbcType=INTEGER},
+        article_date             = #{articleDate,jdbcType=TIMESTAMP},
+        article_last_modify_date = #{articleLastModifyDate,jdbcType=TIMESTAMP},
+        article_content          = #{articleContent,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.Article">
+    update article
+    set user_id                  = #{userId,jdbcType=INTEGER},
+        article_category         = #{articleCategory,jdbcType=VARCHAR},
+        article_title            = #{articleTitle,jdbcType=VARCHAR},
+        article_image            = #{articleImage,jdbcType=VARCHAR},
+        article_views            = #{articleViews,jdbcType=INTEGER},
+        article_comment_count    = #{articleCommentCount,jdbcType=INTEGER},
+        article_date             = #{articleDate,jdbcType=TIMESTAMP},
+        article_last_modify_date = #{articleLastModifyDate,jdbcType=TIMESTAMP}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+</mapper>

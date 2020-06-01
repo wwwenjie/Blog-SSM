@@ -7,7 +7,7 @@
   <!-- load jdbc.properties -->
   <properties resource="jdbc.properties"/>
 
-  <context id="default" targetRuntime="MyBatis3">
+  <context id="default" targetRuntime="MyBatis3" defaultModelType="flat">
     <property name="autoDelimitKeywords" value="true" />
     <property name="beginningDelimiter" value="`" />
     <property name="endingDelimiter" value="`" />
@@ -47,7 +47,7 @@
                          targetProject="src/main/java" type="XMLMAPPER">
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
-    <table tableName="user" mapperName="UserDao"
+    <table tableName="article" mapperName="ArticleDao"
            escapeWildcards="false"
            enableCountByExample="false"
            enableUpdateByExample="false"

@@ -4,7 +4,9 @@ import Home from '../views/Home.vue'
 import AdminHome from '../views/admin/Home.vue'
 import User from '../views/admin/User'
 import Index from '../views/admin/Index'
+import Editor from '../views/admin/Editor'
 import Account from '../views/Account'
+import Article from '../views/admin/Article'
 
 Vue.use(Router)
 
@@ -35,6 +37,16 @@ export default new Router({
           name: 'userList',
           path: 'user',
           component: User
+        },
+        {
+          name: 'edit',
+          path: 'edit',
+          component: Editor
+        },
+        {
+          name: 'article',
+          path: 'article',
+          component: Article
         }
       ]
     }

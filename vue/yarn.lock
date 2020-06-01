@@ -1125,6 +1125,11 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@tinymce/tinymce-vue@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.npm.taobao.org/@tinymce/tinymce-vue/download/@tinymce/tinymce-vue-3.2.2.tgz#a16500fbeebfec4ae43f4e9fe5bd739aeb66a3d6"
+  integrity sha1-oWUA++6/7ErkP06f5b1zmutmo9Y=
+
 "@types/babel__core@^7.1.7":
   version "7.1.7"
   resolved "https://registry.npm.taobao.org/@types/babel__core/download/@types/babel__core-7.1.7.tgz#1dacad8840364a57c98d0dd4855c6dd3752c6b89"
