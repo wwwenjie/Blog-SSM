@@ -90,12 +90,17 @@ export default {
       {
         icon: 'mdi-post',
         text: '博文列表',
-        route: 'article'
+        route: 'articleList'
       },
       {
         icon: 'mdi-pencil',
         text: '编辑博文',
         route: 'edit'
+      },
+      {
+        icon: 'mdi-pencil',
+        text: '评论列表',
+        route: 'commentList'
       }
     ]
   }),

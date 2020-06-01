@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.jinwenjie.dao.CommentDao">
+  <resultMap id="BaseResultMap" type="me.jinwenjie.model.Comment">
+    <constructor>
+      <idArg column="comment_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="comment_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="parent_comment_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="me.jinwenjie.model.Comment">
+    <constructor>
+      <idArg column="comment_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="user_ip" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="article_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="comment_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="parent_comment_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="comment_content" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    comment_id, user_id, user_name, user_ip, article_id, comment_date, parent_comment_id
+  </sql>
+  <sql id="Blob_Column_List">
+    comment_content
+  </sql>
+  <select id="findAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from comment
+  </select>
+  <select id="getByArticleId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from comment
+    where article_id=#{articleId}
+  </select>
+  <select id="count" resultType="java.lang.Integer">
+    select count(comment_id)
+    from comment
+  </select>
+  <select id="getByUserId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from comment
+    where user_id=#{userId}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete
+    from comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="me.jinwenjie.model.Comment">
+    insert into comment (comment_id, user_id, user_name,
+                         user_ip, article_id, comment_date,
+                         parent_comment_id, comment_content)
+    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
+            #{userIp,jdbcType=VARCHAR}, #{articleId,jdbcType=INTEGER}, #{commentDate,jdbcType=TIMESTAMP},
+            #{parentCommentId,jdbcType=INTEGER}, #{commentContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="me.jinwenjie.model.Comment">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userIp != null">
+        user_ip,
+      </if>
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="commentDate != null">
+        comment_date,
+      </if>
+      <if test="parentCommentId != null">
+        parent_comment_id,
+      </if>
+      <if test="commentContent != null">
+        comment_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null">
+        #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="commentDate != null">
+        #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentCommentId != null">
+        #{parentCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        #{commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.jinwenjie.model.Comment">
+    update comment
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null">
+        user_ip = #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="commentDate != null">
+        comment_date = #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentCommentId != null">
+        parent_comment_id = #{parentCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        comment_content = #{commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="me.jinwenjie.model.Comment">
+    update comment
+    set user_id           = #{userId,jdbcType=INTEGER},
+        user_name         = #{userName,jdbcType=VARCHAR},
+        user_ip           = #{userIp,jdbcType=VARCHAR},
+        article_id        = #{articleId,jdbcType=INTEGER},
+        comment_date      = #{commentDate,jdbcType=TIMESTAMP},
+        parent_comment_id = #{parentCommentId,jdbcType=INTEGER},
+        comment_content   = #{commentContent,jdbcType=LONGVARCHAR}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.jinwenjie.model.Comment">
+    update comment
+    set user_id           = #{userId,jdbcType=INTEGER},
+        user_name         = #{userName,jdbcType=VARCHAR},
+        user_ip           = #{userIp,jdbcType=VARCHAR},
+        article_id        = #{articleId,jdbcType=INTEGER},
+        comment_date      = #{commentDate,jdbcType=TIMESTAMP},
+        parent_comment_id = #{parentCommentId,jdbcType=INTEGER}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

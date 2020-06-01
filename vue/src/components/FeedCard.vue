@@ -12,6 +12,7 @@
       <v-img
         height="100%"
         gradient="rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)"
+        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
       >
         <v-row
           v-if="!value.prominent"
@@ -71,7 +72,7 @@ export default {
   },
   methods: {
     onClick (id) {
-      console.log(id)
+      this.$router.push({ name: 'article', params: { id: id } })
     }
   }
 }

@@ -12,7 +12,7 @@
       <v-row align="center">
         <h1
           class="mx-2"
-          @click="$vuetify.goTo(0)"
+          @click="clickHome"
         >
           Blog
         </h1>
@@ -31,7 +31,7 @@
         <v-spacer />
 
         <router-link
-          to="admin/index"
+          :to="{ name: 'adminIndex' }"
           style="text-decoration: none"
         >
           <v-btn
@@ -63,6 +63,10 @@ export default {
       if (item.to || !item.href) return
 
       this.$vuetify.goTo(item.href.endsWith('!') ? 0 : item.href)
+    },
+    clickHome () {
+      this.$vuetify.goTo(0)
+      this.$router.push({ name: 'home' })
     }
   }
 }

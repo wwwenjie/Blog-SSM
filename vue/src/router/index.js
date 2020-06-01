@@ -6,7 +6,9 @@ import User from '../views/admin/User'
 import Index from '../views/admin/Index'
 import Editor from '../views/admin/Editor'
 import Account from '../views/Account'
-import Article from '../views/admin/Article'
+import Article from '../views/Article'
+import ArticleList from '../views/admin/Article'
+import Comment from '../views/admin/Comment'
 
 Vue.use(Router)
 
@@ -17,6 +19,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/article/:id',
+      name: 'article',
+      component: Article
     },
     {
       path: '/account',
@@ -44,9 +51,14 @@ export default new Router({
           component: Editor
         },
         {
-          name: 'article',
+          name: 'articleList',
           path: 'article',
-          component: Article
+          component: ArticleList
+        },
+        {
+          name: 'commentList',
+          path: 'comment',
+          component: Comment
         }
       ]
     }

@@ -8,9 +8,9 @@
   <properties resource="jdbc.properties"/>
 
   <context id="default" targetRuntime="MyBatis3" defaultModelType="flat">
-    <property name="autoDelimitKeywords" value="true" />
-    <property name="beginningDelimiter" value="`" />
-    <property name="endingDelimiter" value="`" />
+    <property name="autoDelimitKeywords" value="true"/>
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
     <!--when suppress all comments, add this plugin to overwrite xml-->
     <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
@@ -47,7 +47,7 @@
                          targetProject="src/main/java" type="XMLMAPPER">
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
-    <table tableName="article" mapperName="ArticleDao"
+    <table tableName="comment" mapperName="CommentDao"
            escapeWildcards="false"
            enableCountByExample="false"
            enableUpdateByExample="false"
