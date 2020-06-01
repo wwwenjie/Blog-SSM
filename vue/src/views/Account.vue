@@ -122,6 +122,10 @@ export default {
       this.loginMode = true
       const auth = await login(this.user)
       localStorage.setItem('token', auth.token)
+      localStorage.setItem('uid', auth.uid)
+      if (auth.admin) {
+        localStorage.setItem('admin', auth.admin)
+      }
       axios.defaults.headers.Authorization = `Bearer ${auth.token}`
       Message.success()
       await this.$router.push({ name: 'adminIndex' })

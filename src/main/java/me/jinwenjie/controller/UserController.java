@@ -31,9 +31,16 @@ public class UserController {
         Integer uid = userService.getLoginUid(user.getUserEmail(), user.getUserPassword());
         if (uid != null) {
             if (authService.isAdmin(uid)) {
-                return JSONResult.singleResult("token", JWTUtil.sign(uid, true));
+                JSONObject json = new JSONObject();
+                json.put("token", JWTUtil.sign(uid, true));
+                json.put("uid", uid);
+                json.put("admin", true);
+                return json;
             } else {
-                return JSONResult.singleResult("token", JWTUtil.sign(uid));
+                JSONObject json = new JSONObject();
+                json.put("token", JWTUtil.sign(uid, true));
+                json.put("uid", uid);
+                return json;
             }
         } else {
             throw new CustomException(ExceptionEnum.USER_ACCOUNT_WRONG);

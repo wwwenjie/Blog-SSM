@@ -21,12 +21,14 @@ export function getCommentByArticleId (articleId) {
   })
 }
 
-export function getCommentByUserId (userId) {
+export function getCommentByUserId (userId, pageNum = 0, pageSize = 8) {
   return request({
     url: '/comments',
     method: 'GET',
     params: {
-      userId: userId
+      userId: userId,
+      pageNum: pageNum,
+      pageSize: pageSize
     }
   })
 }

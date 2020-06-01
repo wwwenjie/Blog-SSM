@@ -49,7 +49,7 @@
 
 <script>
 import Message from '../../util/message'
-import { deleteArticle, getArticleList, getArticleTotal } from '../../api/article'
+import { deleteArticle, getArticleByUserId, getArticleList, getArticleTotal } from '../../api/article'
 
 export default {
   name: 'Article',
@@ -116,7 +116,11 @@ export default {
     },
     async getArticles (options) {
       this.loading = true
-      this.articles = await getArticleList(options.page, options.itemsPerPage)
+      if (localStorage.getItem('admin')) {
+        this.articles = await getArticleList(options.page, options.itemsPerPage)
+      } else {
+        this.articles = await getArticleByUserId(localStorage.getItem('uid'), options.page, options.itemsPerPage)
+      }
       this.articles.forEach(article => {
         const date = new Date(article.articleDate + 8 * 3600 * 1000)
         const date2 = new Date(article.articleLastModifyDate + 8 * 3600 * 1000)

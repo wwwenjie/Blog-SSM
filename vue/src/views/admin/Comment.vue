@@ -13,11 +13,15 @@
         color="white"
       >
         <v-toolbar-title>评论列表</v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        />
+        <v-spacer />
+        <div v-if="!admin">
+          <v-btn @click="myCommentMode=true">
+            查看我的评论
+          </v-btn>
+          <v-btn @click="myCommentMode=false">
+            查看我的博客评论
+          </v-btn>
+        </div>
       </v-toolbar>
       <v-dialog
         v-model="dialog"
@@ -74,12 +78,22 @@
 
 <script>
 import Message from '../../util/message'
-import { deleteComment, getCommentTotal, getCommentList, updateComment } from '../../api/comment'
+import {
+  deleteComment,
+  getCommentTotal,
+  getCommentList,
+  updateComment,
+  getCommentByUserId,
+  getCommentByArticleId
+} from '../../api/comment'
+import { getArticleByUserId } from '../../api/article'
 
 export default {
   name: 'Comment',
   data () {
     return {
+      admin: localStorage.getItem('admin'),
+      myCommentMode: true,
       editMode: true,
       dialog: false,
       text: '操作成功',
@@ -131,6 +145,9 @@ export default {
   watch: {
     options: async function (options) {
       await this.getComments(options)
+    },
+    myCommentMode: async function (options) {
+      await this.getComments(options)
     }
   },
   async mounted () {
@@ -164,7 +181,25 @@ export default {
     },
     async getComments (options) {
       this.loading = true
-      this.comments = await getCommentList(options.page, options.itemsPerPage)
+      if (localStorage.getItem('admin')) {
+        this.comments = await getCommentList(options.page, options.itemsPerPage)
+      } else {
+        const uid = localStorage.getItem('uid')
+        if (this.myCommentMode) {
+          this.comments = await getCommentByUserId(uid, options.page, options.itemsPerPage)
+        } else {
+          const articles = await getArticleByUserId(uid)
+          if (articles.length > 0) {
+            for (const article of articles) {
+              this.comments = await getCommentByArticleId(article.articleId)
+            }
+          }
+        }
+        if (this.comments.length === 0) {
+          this.loading = false
+          return
+        }
+      }
       this.comments.forEach(comment => {
         const date = new Date(comment.commentDate + 8 * 3600 * 1000)
         comment.commentDate = date.toJSON().substr(0, 19).replace('T', ' ')

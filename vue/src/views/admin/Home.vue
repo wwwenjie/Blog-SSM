@@ -74,7 +74,6 @@
 
 <script>
 import axios from '../../plugins/axios'
-import { getUserTotal } from '../../api/user'
 
 export default {
   name: 'AdminHome',
@@ -98,25 +97,29 @@ export default {
         route: 'edit'
       },
       {
-        icon: 'mdi-pencil',
+        icon: 'mdi-comment-text-multiple',
         text: '评论列表',
         route: 'commentList'
       }
     ]
   }),
   async beforeRouteEnter (to, from, next) {
-    try {
-      // 请求一个需要权限的资源
-      await getUserTotal()
+    if (localStorage.getItem('token')) {
       next()
-      // 若 401 错误则跳转登陆页面
-    } catch (e) {
+    } else {
       next({ path: '/account' })
+    }
+  },
+  mounted () {
+    if (!localStorage.getItem('admin')) {
+      this.items.shift()
     }
   },
   methods: {
     logout () {
       axios.defaults.headers.Authorization = null
+      localStorage.removeItem('token')
+      localStorage.removeItem('admin')
       this.$router.push({ name: 'account' })
     }
   }
