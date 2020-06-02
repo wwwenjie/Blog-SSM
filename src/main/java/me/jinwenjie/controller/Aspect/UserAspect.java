@@ -45,7 +45,7 @@ public class UserAspect {
         token = token == null ? "" : token.split(" ")[1];
         Log log = new Log();
         log.setAction(joinPoint.getSignature().getName());
-        log.setUser(userService.get(JWTUtil.getUserId(token)).getUserName());
+        log.setUser("用户名: " + userService.get(JWTUtil.getUserId(token)).getUserName());
         log.setIp(request.getRemoteAddr());
         logService.addLog(log);
     }
@@ -56,7 +56,7 @@ public class UserAspect {
         User user = (User) joinPoint.getArgs()[0];
         Log log = new Log();
         log.setAction(joinPoint.getSignature().getName());
-        log.setUser("用户邮箱：" + user.getUserEmail() + ", 用户密码：" + user.getUserEmail());
+        log.setUser("用户邮箱: " + user.getUserEmail() + ", 用户密码: " + user.getUserEmail());
         log.setIp(request.getRemoteAddr());
         logService.addLog(log);
     }

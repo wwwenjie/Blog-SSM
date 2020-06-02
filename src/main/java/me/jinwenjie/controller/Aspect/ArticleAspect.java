@@ -45,7 +45,7 @@ public class ArticleAspect {
         }
         Log log = new Log();
         log.setAction(joinPoint.getSignature().getName());
-        log.setUser(userService.get(JWTUtil.getUserId(token)).getUserName() + " 博文ID: " + id);
+        log.setUser("用户名: " + userService.get(JWTUtil.getUserId(token)).getUserName() + ", 博文ID: " + id);
         log.setIp(request.getRemoteAddr());
         logService.addLog(log);
     }

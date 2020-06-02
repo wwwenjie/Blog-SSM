@@ -103,7 +103,7 @@ export default {
         route: 'commentList'
       },
       {
-        icon: 'mdi-comment-text-multiple',
+        icon: 'mdi-sort-variant-lock',
         text: '日志列表',
         route: 'logList'
       }
@@ -120,6 +120,7 @@ export default {
   mounted () {
     if (!localStorage.getItem('admin')) {
       this.items.shift()
+      this.items.pop()
     }
   },
   methods: {
