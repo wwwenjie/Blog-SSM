@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> getAllUser(Integer pageNum, Integer pageSize) {
+    public List<User> getAll(Integer pageNum, Integer pageSize) {
         pageNum = pageNum == null ? 0 : pageNum;
         pageSize = pageSize == null ? 5 : pageSize;
         PageHelper.startPage(pageNum, pageSize);
@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/users/total")
-    public Integer countTotalUser() {
+    public Integer countTotal() {
         return userService.count();
     }
 

@@ -9,6 +9,8 @@ import Account from '../views/Account'
 import Article from '../views/Article'
 import ArticleList from '../views/admin/Article'
 import Comment from '../views/admin/Comment'
+import Writer from '../views/Writer'
+import Log from '../views/admin/Log'
 
 Vue.use(Router)
 
@@ -29,6 +31,11 @@ export default new Router({
       path: '/account',
       name: 'account',
       component: Account
+    },
+    {
+      path: '/writer',
+      name: 'writer',
+      component: Writer
     },
     {
       path: '/admin',
@@ -59,6 +66,11 @@ export default new Router({
           name: 'commentList',
           path: 'comment',
           component: Comment
+        },
+        {
+          name: 'logList',
+          path: 'log',
+          component: Log
         }
       ]
     }

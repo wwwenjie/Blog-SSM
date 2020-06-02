@@ -47,8 +47,9 @@
                          targetProject="src/main/java" type="XMLMAPPER">
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
-    <table tableName="option" mapperName="OptionDao"
-           enableInsert="false"
+    <table tableName="log" mapperName="LogDao"
+           enableUpdateByPrimaryKey="false"
+           enableDeleteByPrimaryKey="false"
            escapeWildcards="false"
            enableCountByExample="false"
            enableUpdateByExample="false"

@@ -74,6 +74,7 @@
 
 <script>
 import axios from '../../plugins/axios'
+import Message from '../../util/message'
 
 export default {
   name: 'AdminHome',
@@ -100,6 +101,11 @@ export default {
         icon: 'mdi-comment-text-multiple',
         text: '评论列表',
         route: 'commentList'
+      },
+      {
+        icon: 'mdi-comment-text-multiple',
+        text: '日志列表',
+        route: 'logList'
       }
     ]
   }),
@@ -107,6 +113,7 @@ export default {
     if (localStorage.getItem('token')) {
       next()
     } else {
+      Message.error('请先登陆')
       next({ path: '/account' })
     }
   },

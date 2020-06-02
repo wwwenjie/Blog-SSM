@@ -45,7 +45,7 @@ public class ArticleController {
     }
 
     @PostMapping("")
-    public JSONObject create(@RequestBody Article article, HttpServletRequest request) {
+    public JSONObject createArticle(@RequestBody Article article, HttpServletRequest request) {
         if (article.getUserId() == null) {
             String token = request.getHeader("Authorization").split(" ")[1];
             article.setUserId(JWTUtil.getUserId(token));
@@ -55,13 +55,13 @@ public class ArticleController {
     }
 
     @DeleteMapping("")
-    public JSONObject delete(Integer articleId) {
+    public JSONObject deleteArticle(Integer articleId) {
         articleService.delete(articleId);
         return JSONResult.success();
     }
 
     @PatchMapping("")
-    public JSONObject update(@RequestBody Article article) {
+    public JSONObject updateArticle(@RequestBody Article article) {
         articleService.update(article);
         return JSONResult.success();
     }
