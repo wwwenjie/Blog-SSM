@@ -14,7 +14,7 @@
           class="mx-2"
           @click="clickHome"
         >
-          Blog
+          {{ blogName }}
         </h1>
 
         <!--        <v-btn-->
@@ -51,10 +51,18 @@
 import {
   mapMutations
 } from 'vuex'
+import { getBlogName } from '../../api/option'
 
 export default {
   name: 'CoreAppBar',
-
+  data () {
+    return {
+      blogName: 'blog'
+    }
+  },
+  async mounted () {
+    this.blogName = await getBlogName()
+  },
   methods: {
     ...mapMutations(['toggleDrawer']),
     onClick (e, item) {

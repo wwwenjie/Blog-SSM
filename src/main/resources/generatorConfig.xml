@@ -47,7 +47,8 @@
                          targetProject="src/main/java" type="XMLMAPPER">
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
-    <table tableName="comment" mapperName="CommentDao"
+    <table tableName="option" mapperName="OptionDao"
+           enableInsert="false"
            escapeWildcards="false"
            enableCountByExample="false"
            enableUpdateByExample="false"

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.jinwenjie.dao.OptionDao">
+  <resultMap id="BaseResultMap" type="me.jinwenjie.model.Option">
+    <constructor>
+      <idArg column="option_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="option_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="option_value" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="option_enable" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    option_id, option_name, option_value, option_enable
+  </sql>
+  <select id="getOptionValueByName" parameterType="java.lang.String" resultType="java.lang.String">
+    select option_value
+    from `option`
+    where option_name = #{optionName,jdbcType=VARCHAR}
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="me.jinwenjie.model.Option">
+    update `option`
+    <set>
+      <if test="optionName != null">
+        option_name = #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="optionValue != null">
+        option_value = #{optionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="optionEnable != null">
+        option_enable = #{optionEnable,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where option_id = #{optionId,jdbcType=INTEGER}
+  </update>
+</mapper>
